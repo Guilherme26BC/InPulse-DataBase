@@ -1,13 +1,6 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-
-import java.util.List;
 
 public class CategoriasRequestCreate {
     private String tipo;

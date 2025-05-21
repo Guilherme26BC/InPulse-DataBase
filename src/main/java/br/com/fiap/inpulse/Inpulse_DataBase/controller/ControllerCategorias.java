@@ -1,8 +1,8 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.CategoriasRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.CategoriasResponse;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.CategoriasResponseCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.CategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

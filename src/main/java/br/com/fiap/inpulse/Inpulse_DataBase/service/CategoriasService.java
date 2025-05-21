@@ -1,6 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.CategoriasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.CategoriasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
