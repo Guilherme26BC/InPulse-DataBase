@@ -1,13 +1,13 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.model;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Entity
 public class Programas {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long programa_id;
     private String nome_programa;
     private String descricao_programa;

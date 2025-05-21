@@ -1,25 +1,20 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.model;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto;
 
-import jakarta.persistence.*;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
 
-import java.util.List;
-
-@Entity
-public class Categorias {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CategoriasResponseCreate {
     private Long categoria_id;
     private String tipo;
-    @Column(unique = true)
     private String nome;
-    @Column(unique = true)
     private String icone;
 
-    @ManyToMany
-    @JoinTable(name = "categorias_ideias",
-    joinColumns = @JoinColumn(name = "ideias"),
-    inverseJoinColumns = @JoinColumn(name = "categorias"))
-    private List<Ideias> ideias;
+    public CategoriasResponseCreate toDto(Categorias categorias){
+        this.setCategoria_id(categorias.getCategoria_id());
+        this.setTipo(categorias.getTipo());
+        this.setNome(categorias.getNome());
+        this.setIcone(categorias.getTipo());
+        return this;
+    }
 
     public Long getCategoria_id() {
         return categoria_id;
@@ -51,13 +46,5 @@ public class Categorias {
 
     public void setIcone(String icone) {
         this.icone = icone;
-    }
-
-    public List<Ideias> getIdeias() {
-        return ideias;
-    }
-
-    public void setIdeias(List<Ideias> ideias) {
-        this.ideias = ideias;
     }
 }

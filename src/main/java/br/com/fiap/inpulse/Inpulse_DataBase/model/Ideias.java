@@ -30,6 +30,7 @@ public class Ideias {
 
     @ManyToMany
     private List<Programas> programas;
+    @ManyToMany
     private List<Categorias> categorias;
 
     public Long getIdeia_id() {
