@@ -1,21 +1,15 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.model;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
 
-import jakarta.persistence.*;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
-@Entity
-public class Funcionarios {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class FuncionariosResponseCreate {
     private Long funcionario_id;
-
     private String primeiro_nome;
     private String ultimo_sobrenome;
-
-    @Column(unique = true)
     private String email;
     private String senha;
     private BigInteger pontos;
@@ -23,16 +17,18 @@ public class Funcionarios {
     private String tier;
     private boolean modo_anonimo;
 
-    @OneToMany(mappedBy = "funcionario",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Ideias> ideias;
-    @ManyToMany
-    private List<Programas> programas;
-
-    @ManyToMany
-    private List<Selos> selos;
-
+    public FuncionariosResponseCreate toModel(Funcionarios funcionarios){
+        this.setFuncionario_id(funcionarios.getFuncionario_id());
+        this.setPrimeiro_nome(funcionarios.getPrimeiro_nome());
+        this.setUltimo_sobrenome(funcionarios.getUltimo_sobrenome());
+        this.setEmail(funcionarios.getEmail());
+        this.setSenha(funcionarios.getSenha());
+        this.setPontos(funcionarios.getPontos());
+        this.setMoedas(funcionarios.getMoedas());
+        this.setTier(funcionarios.getTier());
+        this.setModo_anonimo(funcionarios.isModo_anonimo());
+        return this;
+    }
     public Long getFuncionario_id() {
         return funcionario_id;
     }
@@ -103,29 +99,5 @@ public class Funcionarios {
 
     public void setModo_anonimo(boolean modo_anonimo) {
         this.modo_anonimo = modo_anonimo;
-    }
-
-    public List<Ideias> getIdeias() {
-        return ideias;
-    }
-
-    public void setIdeias(List<Ideias> ideias) {
-        this.ideias = ideias;
-    }
-
-    public List<Programas> getProgramas() {
-        return programas;
-    }
-
-    public void setProgramas(List<Programas> programas) {
-        this.programas = programas;
-    }
-
-    public List<Selos> getSelos() {
-        return selos;
-    }
-
-    public void setSelos(List<Selos> selos) {
-        this.selos = selos;
     }
 }
