@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("proramas")
+@RequestMapping("programas")
 public class ControllerProgramas {
 
     @Autowired
