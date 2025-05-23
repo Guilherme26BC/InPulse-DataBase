@@ -26,7 +26,7 @@ public class ControllerCategorias {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoriasResponse> buscarCategoriaPorId(@PathVariable Long id){
-        return categoriasService.buscarPorId(id).map(new CategoriasResponse()::toDto)
+        return categoriasService.buscarPorId(id).map(c-> new CategoriasResponse().toDto(c))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

@@ -12,7 +12,7 @@ public class CategoriasResponseCreate {
         this.setCategoria_id(categorias.getCategoria_id());
         this.setTipo(categorias.getTipo());
         this.setNome(categorias.getNome());
-        this.setIcone(categorias.getTipo());
+        this.setIcone(categorias.getIcone());
         return this;
     }
 

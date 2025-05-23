@@ -18,7 +18,7 @@ public class ControllerFuncionarios {
     private FuncionariosService funcionariosService;
 
     @PostMapping
-    public ResponseEntity<FuncionariosResponseCreate> criarFuncionario(FuncionariosRequestCreate dto){
+    public ResponseEntity<FuncionariosResponseCreate> criarFuncionario(@RequestBody FuncionariosRequestCreate dto){
         return ResponseEntity.ok().body(
                 new FuncionariosResponseCreate()
                         .toModel(funcionariosService.criarFuncionario(dto)));
@@ -34,6 +34,6 @@ public class ControllerFuncionarios {
     @GetMapping
     public ResponseEntity<List<FuncionariosResponse>> buscarTodos(){
         return ResponseEntity.ok().body(funcionariosService.buscarTodos().stream()
-                .map(new FuncionariosResponse()::toModel).collect(Collectors.toList()));
+                .map(f->new FuncionariosResponse().toModel(f)).collect(Collectors.toList()));
     }
 }

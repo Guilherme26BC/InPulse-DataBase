@@ -19,7 +19,7 @@ public class ControllerSelos {
     private SelosService selosService;
 
     @PostMapping
-    public ResponseEntity<SelosResponseCreate> criarSelos(SelosRequestCreate dto){
+    public ResponseEntity<SelosResponseCreate> criarSelos(@RequestBody SelosRequestCreate dto){
         return ResponseEntity.ok().body(new SelosResponseCreate().toDto(selosService.criarSelos(dto)));
     }
 
@@ -32,7 +32,7 @@ public class ControllerSelos {
 
     @GetMapping
     public ResponseEntity<List<SelosResponse>> buscarTodos(){
-        return ResponseEntity.ok().body(selosService.buscarTodos().stream().map(new SelosResponse()::toDto)
+        return ResponseEntity.ok().body(selosService.buscarTodos().stream().map(s->new SelosResponse().toDto(s))
                 .collect(Collectors.toList()));
     }
 }
