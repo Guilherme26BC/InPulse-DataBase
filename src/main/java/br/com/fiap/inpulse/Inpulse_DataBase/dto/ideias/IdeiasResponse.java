@@ -1,15 +1,6 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.controller;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.math.BigInteger;
 import java.time.LocalDate;

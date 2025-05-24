@@ -1,9 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.IdeiasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.IdeiasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.IdeiasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.IdeiasService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("ideias")
-public class IdeiasController {
+public class ControllerIdeias {
 
     @Autowired
     private IdeiasService ideiasService;
