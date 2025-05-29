@@ -1,10 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
 
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -21,7 +18,7 @@ public class FuncionariosResponse {
     private BigDecimal moedas;
     private String tier;
     private boolean modo_anonimo;
-    private List<String> ideias;
+    private List<IdeiasResponse> ideias;
     private List<String> programas;
     private List<String> selos;
     private List<String> logs;
@@ -37,10 +34,10 @@ public class FuncionariosResponse {
         this.setTier(funcionarios.getTier());
         this.setModo_anonimo(funcionarios.isModo_anonimo());
 
-        List<String> nomesIdeias = funcionarios.getIdeias().stream()
-                .map(p-> p.getNome())
+        List<IdeiasResponse> nomesIdeias = funcionarios.getIdeias().stream()
+                .map(p-> new IdeiasResponse().toDto(p))
                 .collect(Collectors.toList());
-        this.setIdeias(nomesIdeias);
+       this.setIdeias(nomesIdeias);
 
         List<String> nomesProgramas = funcionarios.getProgramas().stream()
                 .map(p-> p.getNome_programa())
@@ -130,11 +127,11 @@ public class FuncionariosResponse {
         this.modo_anonimo = modo_anonimo;
     }
 
-    public List<String> getIdeias() {
+    public List<IdeiasResponse> getIdeias() {
         return ideias;
     }
 
-    public void setIdeias(List<String> ideias) {
+    public void setIdeias(List<IdeiasResponse> ideias) {
         this.ideias = ideias;
     }
 

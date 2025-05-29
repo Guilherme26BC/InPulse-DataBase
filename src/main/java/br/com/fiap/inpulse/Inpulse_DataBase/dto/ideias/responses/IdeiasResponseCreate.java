@@ -1,26 +1,23 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class IdeiasResponse {
+public class IdeiasResponseCreate {
     private Long ideia_id;
     private String nome;
     private String problema;
     private String descricao;
     private String imagem;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate data;
     private BigInteger curtidas;
-    private String funcionario_nome;
-    private List<String> programas_nome;
-    private List<String> categoriasIcone;
+    private String funcionario;
 
-
-    public IdeiasResponse toDto(Ideias ideias){
+    public IdeiasResponseCreate toDto(Ideias ideias){
         this.setIdeia_id(ideias.getIdeia_id());
         this.setNome(ideias.getNome());
         this.setProblema(ideias.getProblema());
@@ -28,18 +25,7 @@ public class IdeiasResponse {
         this.setImagem(ideias.getImagem());
         this.setData(ideias.getData());
         this.setCurtidas(ideias.getCurtidas());
-
-        String funcionarioNome = ideias.getFuncionario().getPrimeiro_nome() + " " +ideias.getFuncionario().getUltimo_sobrenome();
-        this.setFuncionario_nome(funcionarioNome);
-
-        List<String> nomesProgramas =ideias.getProgramas()
-                .stream()
-                .map(p-> p.getNome_programa()).collect(Collectors.toList());
-        this.setProgramas_nome(nomesProgramas);
-
-        List<String> iconesCategorias = ideias.getCategorias().stream()
-                .map(c-> c.getIcone()).collect(Collectors.toList());
-        this.setCategoriasIcone(iconesCategorias);
+        this.setFuncionario(ideias.getFuncionario().getPrimeiro_nome() + " " + ideias.getFuncionario().getUltimo_sobrenome());
         return this;
     }
 
@@ -99,27 +85,11 @@ public class IdeiasResponse {
         this.curtidas = curtidas;
     }
 
-    public String getFuncionario_nome() {
-        return funcionario_nome;
+    public String getFuncionario() {
+        return funcionario;
     }
 
-    public void setFuncionario_nome(String funcionario_nome) {
-        this.funcionario_nome = funcionario_nome;
-    }
-
-    public List<String> getProgramas_nome() {
-        return programas_nome;
-    }
-
-    public void setProgramas_nome(List<String> programas_nome) {
-        this.programas_nome = programas_nome;
-    }
-
-    public List<String> getCategoriasIcone() {
-        return categoriasIcone;
-    }
-
-    public void setCategoriasIcone(List<String> categoriasIcone) {
-        this.categoriasIcone = categoriasIcone;
+    public void setFuncionario(String funcionario) {
+        this.funcionario = funcionario;
     }
 }

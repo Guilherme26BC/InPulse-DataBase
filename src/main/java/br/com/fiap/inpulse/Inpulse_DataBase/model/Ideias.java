@@ -24,7 +24,6 @@ public class Ideias {
     private BigInteger curtidas;
 
     @ManyToOne
-    @Cascade(value = CascadeType.ALL)
     @JoinColumn(name = "funcionario_id")
     private Funcionarios funcionario;
 

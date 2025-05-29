@@ -7,7 +7,7 @@ import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+//CORRIGIR OS CASCADES DAS CLASSES FILHAS
 @Entity
 public class Logs {
     @Id

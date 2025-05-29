@@ -1,6 +1,8 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias;
 
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -10,8 +12,9 @@ public class IdeiasRequestCreate {
     private String problema;
     private String descricao;
     private String imagem;
+    private Long funcionario_id;
 
-    public Ideias toModel(){
+    public Ideias toModel(FuncionariosRepository funcionariosRepository){
         Ideias ideias = new Ideias();
         ideias.setNome(this.getNome());
         ideias.setProblema(this.getProblema());
@@ -19,6 +22,10 @@ public class IdeiasRequestCreate {
         ideias.setImagem(this.getImagem());
         ideias.setData(LocalDate.now());
         ideias.setCurtidas(new BigInteger("0"));
+        Funcionarios funcionarios = funcionariosRepository.findById(this.getFuncionario_id())
+                        .orElseThrow(() ->
+                                new RuntimeException("Funcionario inexistente: " + this.getFuncionario_id()));
+        ideias.setFuncionario(funcionarios);
         return ideias;
     }
     public String getNome() {
@@ -51,5 +58,13 @@ public class IdeiasRequestCreate {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public Long getFuncionario_id() {
+        return funcionario_id;
+    }
+
+    public void setFuncionario_id(Long funcionario_id) {
+        this.funcionario_id = funcionario_id;
     }
 }
