@@ -32,6 +32,10 @@ public class Funcionarios {
 
     @ManyToMany
     private List<Selos> selos;
+    @OneToMany(mappedBy = "funcionarios",
+    cascade =  CascadeType.ALL,
+    orphanRemoval = true)
+    private List<Logs>logs;
 
     public Long getFuncionario_id() {
         return funcionario_id;
@@ -127,5 +131,13 @@ public class Funcionarios {
 
     public void setSelos(List<Selos> selos) {
         this.selos = selos;
+    }
+
+    public List<Logs> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<Logs> logs) {
+        this.logs = logs;
     }
 }

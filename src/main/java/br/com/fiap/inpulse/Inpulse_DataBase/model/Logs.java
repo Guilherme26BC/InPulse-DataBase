@@ -1,9 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,6 +18,8 @@ public class Logs {
     private LocalTime hora;
     private String evento;
     private String email;
+    @ManyToOne
+    @JoinColumn(name ="funcionarios_id")
     private Funcionarios funcionarios;
 
     public Long getLog_id() {

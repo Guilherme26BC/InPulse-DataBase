@@ -2,6 +2,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.logs.LogsRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Logs;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.LogsStatus;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.LogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class LogsService {
     @Autowired
     private FuncionariosRepository funcionariosRepository;
 
-    public Logs criarLogs(LogsRequestCreate dto){
-        return logsRepository.save(dto.toModel(funcionariosRepository));
+    public Logs criarLogs(LogsRequestCreate dto, LogsStatus status){
+        return logsRepository.save(dto.toModel(funcionariosRepository, status));
     }
 
     public List<Logs> buscarTodos(){

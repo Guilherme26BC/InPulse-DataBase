@@ -1,9 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
@@ -27,6 +24,7 @@ public class FuncionariosResponse {
     private List<String> ideias;
     private List<String> programas;
     private List<String> selos;
+    private List<String> logs;
 
     public FuncionariosResponse toModel(Funcionarios funcionarios){
         this.setFuncionario_id(funcionarios.getFuncionario_id());
@@ -53,6 +51,9 @@ public class FuncionariosResponse {
                 .map(p-> p.getNome())
                 .collect(Collectors.toList());
         this.setSelos(nomesSelos);
+        List<String> nomesLogs = funcionarios.getLogs().stream()
+                .map(l->l.getEvento()).collect(Collectors.toList());
+       this.setLogs(nomesLogs);
         return this;
     }
 
@@ -151,5 +152,13 @@ public class FuncionariosResponse {
 
     public void setSelos(List<String> selos) {
         this.selos = selos;
+    }
+
+    public List<String> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<String> logs) {
+        this.logs = logs;
     }
 }

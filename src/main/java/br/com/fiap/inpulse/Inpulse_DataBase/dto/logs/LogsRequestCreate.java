@@ -9,13 +9,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class LogsRequestCreate {
-    private LogsStatus status;
     private String evento;
     private Long funcionarios_id;
 
-    public Logs toModel(FuncionariosRepository funcionariosRepository){
+    public Logs toModel(FuncionariosRepository funcionariosRepository, LogsStatus status){
         Logs log = new Logs();
-        log.setStatus(this.getStatus());
+        log.setStatus(status);
         log.setEvento(this.getEvento());
         Funcionarios funcionario = funcionariosRepository.findById(this.getFuncionarios_id())
                 .orElseThrow(() ->
@@ -26,13 +25,6 @@ public class LogsRequestCreate {
         log.setData(LocalDate.now());
         log.setHora(LocalTime.now());
         return log;
-    }
-    public LogsStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(LogsStatus status) {
-        this.status = status;
     }
 
     public String getEvento() {

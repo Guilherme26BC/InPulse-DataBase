@@ -3,6 +3,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.logs.LogsRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.logs.LogsResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Logs;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.LogsStatus;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.LogsService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class ControllerLogs {
     @Autowired
     private LogsService logsService;
     @PostMapping
-    public ResponseEntity<LogsResponse> criarLog(@RequestBody LogsRequestCreate dto){
-        return ResponseEntity.ok().body(new LogsResponse().toDto(logsService.criarLogs(dto)));
+    public ResponseEntity<LogsResponse> criarLog(@RequestBody LogsRequestCreate dto,  LogsStatus status){
+        return ResponseEntity.ok().body(new LogsResponse().toDto(logsService.criarLogs(dto, status)));
     }
     @GetMapping
     public ResponseEntity<List<LogsResponse>> buscarTodos(){
