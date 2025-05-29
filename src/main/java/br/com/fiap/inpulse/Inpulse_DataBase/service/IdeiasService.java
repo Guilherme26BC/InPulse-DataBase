@@ -27,4 +27,12 @@ public class IdeiasService {
     public List<Ideias> buscarTodas(){
         return ideiasRepository.findAll();
     }
+    public boolean deletarIdeia(Long id){
+        if(ideiasRepository.existsById(id)){
+            ideiasRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

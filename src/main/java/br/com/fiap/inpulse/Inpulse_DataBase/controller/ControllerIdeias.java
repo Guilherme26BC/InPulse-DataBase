@@ -34,4 +34,12 @@ public class ControllerIdeias {
         return ResponseEntity.ok().body(ideiasService.buscarTodas().stream()
                 .map(i-> new IdeiasResponse().toDto(i)).collect(Collectors.toList()));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarIdeia(@PathVariable Long id){
+        if(ideiasService.deletarIdeia(id)){
+            return ResponseEntity.status(204).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
