@@ -5,6 +5,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.SelosResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.SelosResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.SelosService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,13 @@ public class ControllerSelos {
     public ResponseEntity<List<SelosResponse>> buscarTodos(){
         return ResponseEntity.ok().body(selosService.buscarTodos().stream().map(s->new SelosResponse().toDto(s))
                 .collect(Collectors.toList()));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarSelos(@PathVariable Long id){
+        if(selosService.deletarSelos(id)){
+            return ResponseEntity.status(204).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

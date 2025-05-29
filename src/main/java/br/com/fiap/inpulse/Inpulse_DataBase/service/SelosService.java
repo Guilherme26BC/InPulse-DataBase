@@ -27,4 +27,12 @@ public class SelosService {
     public List<Selos> buscarTodos(){
         return selosRepository.findAll();
     }
+    public boolean deletarSelos(Long id){
+        if(selosRepository.existsById(id)){
+            selosRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

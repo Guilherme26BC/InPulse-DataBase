@@ -28,4 +28,13 @@ public class LogsService {
     public Optional<Logs> buscarPorId(Long id){
         return logsRepository.findById(id);
     }
+    public boolean deletarLog(Long id){
+        if(logsRepository.existsById(id)){
+            logsRepository.deleteById(id);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
