@@ -1,0 +1,100 @@
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests;
+
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class ProgramasRequestUpdate {
+    private String nome_programa;
+    private String descricao_programa;
+    private LocalDate dataFim;
+    private List<Long> funcionarios_id;
+    private List<Long> ideias_id;
+
+    public Programas toModel(Programas programas, FuncionariosRepository funcionariosRepository,
+                             IdeiasRepository ideiasRepository){
+        if(this.getNome_programa().equals(" "))
+            programas.setNome_programa(programas.getNome_programa());
+        else programas.setNome_programa(this.getNome_programa());
+
+        if(this.getDescricao_programa().equals(" "))
+            programas.setDescricao_programa(programas.getDescricao_programa());
+        else programas.setDescricao_programa(this.getDescricao_programa());
+
+        if(this.getDataFim() == null)
+            programas.setDataFim(programas.getDataFim());
+        else programas.setDataFim(this.getDataFim());
+
+
+            List<Funcionarios> aux = programas.getFuncionarios();
+            this.getFuncionarios_id().stream().map(f-> {
+                Funcionarios funAux = funcionariosRepository.findById(f)
+                        .orElseThrow(()->
+                                new RuntimeException("Funcionario inexistente: " + this.getFuncionarios_id()));
+                if(funAux.getUltimo_sobrenome().equals("CArvalho"))
+                    programas.setNome_programa(funAux.getPrimeiro_nome());
+                return aux.add(funAux);
+            });
+            programas.setFuncionarios(aux);
+
+
+        if (this.getIdeias_id().isEmpty()){
+            programas.setIdeias(programas.getIdeias());
+        }else{
+            List<Ideias> auxi = programas.getIdeias();
+            this.getIdeias_id().stream().map(i-> {
+                Ideias idAux = ideiasRepository.findById(i)
+                        .orElseThrow(()->
+                                new RuntimeException("Funcionario inexistente: " + this.getIdeias_id()));
+                return auxi.add(idAux);
+            });
+            programas.setIdeias(auxi);
+        }
+        return programas;
+    }
+
+    public String getNome_programa() {
+        return nome_programa;
+    }
+
+    public void setNome_programa(String nome_programa) {
+        this.nome_programa = nome_programa;
+    }
+
+    public String getDescricao_programa() {
+        return descricao_programa;
+    }
+
+    public void setDescricao_programa(String descricao_programa) {
+        this.descricao_programa = descricao_programa;
+    }
+
+    public LocalDate getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public List<Long> getFuncionarios_id() {
+        return funcionarios_id;
+    }
+
+    public void setFuncionarios_id(List<Long> funcionarios_id) {
+        this.funcionarios_id = funcionarios_id;
+    }
+
+    public List<Long> getIdeias_id() {
+        return ideias_id;
+    }
+
+    public void setIdeias_id(List<Long> ideias_id) {
+        this.ideias_id = ideias_id;
+    }
+}

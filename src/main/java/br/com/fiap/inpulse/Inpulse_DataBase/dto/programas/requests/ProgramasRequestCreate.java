@@ -1,12 +1,11 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
-public class ProgramasResponseCreate {
-    private Long programa_id;
+public class ProgramasRequestCreate {
     private String nome_programa;
     private String descricao_programa;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -14,20 +13,13 @@ public class ProgramasResponseCreate {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataFim;
 
-    public ProgramasResponseCreate toDto(Programas programas){
-        this.setPrograma_id(programas.getPrograma_id());
-        this.setNome_programa(programas.getNome_programa());
-        this.setDescricao_programa(programas.getDescricao_programa());
-        this.setDataInicio(programas.getDataInicio());
-        this.setDataFim(programas.getDataFim());
-        return this;
-    }
-    public Long getPrograma_id() {
-        return programa_id;
-    }
-
-    public void setPrograma_id(Long programa_id) {
-        this.programa_id = programa_id;
+    public Programas toModel(){
+        Programas programas = new Programas();
+        programas.setNome_programa(this.getNome_programa());
+        programas.setDescricao_programa(this.getDescricao_programa());
+        programas.setDataInicio(this.getDataInicio());
+        programas.setDataFim(this.getDataFim());
+        return programas;
     }
 
     public String getNome_programa() {

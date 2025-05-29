@@ -1,12 +1,7 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +24,7 @@ public class ProgramasResponse {
         this.setDescricao_programa(programas.getDescricao_programa());
         this.setDataInicio(programas.getDataInicio());
         this.setDataFim(programas.getDataFim());
+
         List<String> nomesFun = programas.getFuncionarios().stream()
                 .map(p->{  return p.getPrimeiro_nome() + " " + p.getUltimo_sobrenome();
     }).collect(Collectors.toList());
@@ -37,6 +33,7 @@ public class ProgramasResponse {
                 .map(p->{  return p.getNome();
                 }).collect(Collectors.toList());
         this.setIdeias_nome(nomesIdeias);
+
         return this;
     }
 

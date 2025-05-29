@@ -1,9 +1,10 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.ProgramasRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.ProgramasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class ProgramasService {
     private ProgramasRepository programasRepository;
     @Autowired
     private FuncionariosRepository funcionariosRepository;
+    @Autowired
+    private IdeiasRepository ideiasRepositorys;
 
     public Programas criarPrograma(ProgramasRequestCreate dto){
         return programasRepository.save(dto.toModel());
@@ -38,5 +41,9 @@ public class ProgramasService {
         else{
             return false;
         }
+    }
+    public Optional<Programas> atualizarPrograma(Long id, ProgramasRequestUpdate dto){
+        return programasRepository.findById(id)
+                .map(p-> programasRepository.save(dto.toModel(p, funcionariosRepository, ideiasRepositorys)));
     }
 }
