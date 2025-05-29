@@ -1,6 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.requests.CategoriasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.requests.CategoriasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.CategoriasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
@@ -36,5 +37,9 @@ public class CategoriasService {
             return true;
         }else
             return false;
+    }
+    public Optional<Categorias> atualizarCategoria(Long id, CategoriasRequestUpdate dto){
+        return categoriasRepository.findById(id).map(c ->
+                categoriasRepository.save(dto.toModel(c)));
     }
 }

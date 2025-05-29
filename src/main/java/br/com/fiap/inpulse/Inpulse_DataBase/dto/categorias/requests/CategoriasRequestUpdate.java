@@ -1,19 +1,20 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
+import jakarta.persistence.Column;
 
-public class CategoriasRequestCreate {
+public class CategoriasRequestUpdate {
     private String tipo;
     private String nome;
     private String icone;
 
-    public Categorias toModel(){
-        Categorias categorias = new Categorias();
+    public Categorias toModel(Categorias categorias){
         categorias.setTipo(this.getTipo());
         categorias.setNome(this.getNome());
         categorias.setIcone(this.getIcone());
         return categorias;
     }
+
     public String getTipo() {
         return tipo;
     }

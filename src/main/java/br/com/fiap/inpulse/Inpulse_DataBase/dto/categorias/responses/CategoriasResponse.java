@@ -1,4 +1,4 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
 

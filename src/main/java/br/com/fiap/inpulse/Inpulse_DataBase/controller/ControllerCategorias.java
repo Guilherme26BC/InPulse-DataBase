@@ -1,8 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasResponse;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.CategoriasResponseCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.requests.CategoriasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.requests.CategoriasRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.responses.CategoriasResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.responses.CategoriasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.CategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,12 @@ public class ControllerCategorias {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriasResponse> atualizarCategorias(@PathVariable Long id, @RequestBody CategoriasRequestUpdate dto){
+        return categoriasService.atualizarCategoria(id, dto).map(c-> new CategoriasResponse().toDto(c))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
