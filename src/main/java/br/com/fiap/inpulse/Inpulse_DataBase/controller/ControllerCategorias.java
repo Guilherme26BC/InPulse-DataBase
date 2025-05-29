@@ -34,7 +34,7 @@ public class ControllerCategorias {
     @GetMapping
     public ResponseEntity<List<CategoriasResponse>> bucarTodasCategorias(){
         return ResponseEntity.ok().body(categoriasService.buscarTodas().stream()
-                .map(new CategoriasResponse()::toDto).collect(Collectors.toList()));
+                .map(c->new CategoriasResponse().toDto(c)).collect(Collectors.toList()));
     }
 
     @DeleteMapping("/{id}")

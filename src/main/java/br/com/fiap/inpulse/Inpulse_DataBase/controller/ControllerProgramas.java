@@ -28,11 +28,11 @@ public class ControllerProgramas {
     @GetMapping
     public ResponseEntity<List<ProgramasResponse>> buscarTodos(){
         return ResponseEntity.ok().body(programasService.buscarTodas()
-                .stream().map(new ProgramasResponse()::toDto)
+                .stream().map(p->new ProgramasResponse().toDto(p))
                 .collect(Collectors.toList()));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProgramasResponse> buscarPorId(@PathVariable Long id){
         return programasService.buscarPorId(id).map(p ->new ProgramasResponse().toDto(p))
                 .map(ResponseEntity::ok)

@@ -33,7 +33,8 @@ public class ControllerSelos {
 
     @GetMapping
     public ResponseEntity<List<SelosResponse>> buscarTodos(){
-        return ResponseEntity.ok().body(selosService.buscarTodos().stream().map(s->new SelosResponse().toDto(s))
+        return ResponseEntity.ok().body(selosService.buscarTodos().stream()
+                .map(s->new SelosResponse().toDto(s))
                 .collect(Collectors.toList()));
     }
     @DeleteMapping("/{id}")
