@@ -36,6 +36,13 @@ public class ControllerCategorias {
                 .map(new CategoriasResponse()::toDto).collect(Collectors.toList()));
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCategorias(@PathVariable Long id){
+        if(categoriasService.deletearCategoria(id)){
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

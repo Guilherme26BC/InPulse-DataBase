@@ -29,4 +29,12 @@ public class CategoriasService {
     public List<Categorias> buscarTodas(){
         return categoriasRepository.findAll();
     }
+
+    public boolean deletearCategoria(Long id){
+        if (categoriasRepository.existsById(id)){
+            categoriasRepository.deleteById(id);
+            return true;
+        }else
+            return false;
+    }
 }
