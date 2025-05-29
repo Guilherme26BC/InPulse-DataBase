@@ -1,5 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests;
 
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
@@ -8,6 +9,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProgramasRequestUpdate {
     private String nome_programa;
@@ -30,31 +32,20 @@ public class ProgramasRequestUpdate {
             programas.setDataFim(programas.getDataFim());
         else programas.setDataFim(this.getDataFim());
 
-
-            List<Funcionarios> aux = programas.getFuncionarios();
-            this.getFuncionarios_id().stream().map(f-> {
-                Funcionarios funAux = funcionariosRepository.findById(f)
-                        .orElseThrow(()->
-                                new RuntimeException("Funcionario inexistente: " + this.getFuncionarios_id()));
-                if(funAux.getUltimo_sobrenome().equals("CArvalho"))
-                    programas.setNome_programa(funAux.getPrimeiro_nome());
-                return aux.add(funAux);
-            });
+        List<Funcionarios> aux = this.getFuncionarios_id().stream().map(f->{
+                Funcionarios funAux = funcionariosRepository.findById(f).orElseThrow(()->
+                        new RuntimeException("Funcionario inexistente: " + this.getFuncionarios_id()));
+                return funAux;
+            }).collect(Collectors.toList());
             programas.setFuncionarios(aux);
 
+        List<Ideias> auxi =this.getIdeias_id().stream().map(i->{
+            Ideias ideAux = ideiasRepository.findById(i).orElseThrow(()->
+                    new RuntimeException("ideia inexistente: " + this.getIdeias_id()));
+            return ideAux;
+        }).collect(Collectors.toList()); ;
+        programas.setIdeias(auxi);
 
-        if (this.getIdeias_id().isEmpty()){
-            programas.setIdeias(programas.getIdeias());
-        }else{
-            List<Ideias> auxi = programas.getIdeias();
-            this.getIdeias_id().stream().map(i-> {
-                Ideias idAux = ideiasRepository.findById(i)
-                        .orElseThrow(()->
-                                new RuntimeException("Funcionario inexistente: " + this.getIdeias_id()));
-                return auxi.add(idAux);
-            });
-            programas.setIdeias(auxi);
-        }
         return programas;
     }
 

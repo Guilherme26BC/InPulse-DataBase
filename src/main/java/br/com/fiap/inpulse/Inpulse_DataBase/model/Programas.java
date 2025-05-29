@@ -15,15 +15,17 @@ public class Programas {
     private LocalDate dataFim;
 
     @ManyToMany
-    @JoinTable(name = "programa_funcionario",
-            joinColumns = @JoinColumn(name = "funcionarios"),
-            inverseJoinColumns = @JoinColumn(name = "programas"))
+    @JoinTable(
+            name = "programas_funcionarios",
+            joinColumns = @JoinColumn(name = "programas_programa_id"), // FK da tabela 'programas'
+            inverseJoinColumns = @JoinColumn(name = "funcionarios_funcionario_id") // FK da tabela 'funcionarios'
+    )
     private List<Funcionarios> funcionarios;
 
     @ManyToMany
-    @JoinTable(name = "idea_funcionario",
-    joinColumns = @JoinColumn(name = "ideias"),
-    inverseJoinColumns = @JoinColumn(name = "programas"))
+    @JoinTable(name = "ideias_funcionarios",
+            joinColumns = @JoinColumn(name = "ideias"),
+            inverseJoinColumns = @JoinColumn(name = "programas"))
     private List<Ideias> ideias;
 
     public Long getPrograma_id() {

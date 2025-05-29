@@ -27,7 +27,7 @@ public class Funcionarios {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Ideias> ideias;
-    @ManyToMany
+    @ManyToMany(mappedBy = "funcionarios")
     private List<Programas> programas;
 
     @ManyToMany

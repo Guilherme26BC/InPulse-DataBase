@@ -1,7 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.IdeiasRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.IdeiasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.CategoriasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,8 @@ public class IdeiasService {
     private IdeiasRepository ideiasRepository;
     @Autowired
     private FuncionariosRepository funcionariosRepository;
-
+    @Autowired
+    private CategoriasRepository categoriasRepository;
     public Ideias criarIdeia(IdeiasRequestCreate dto){
         return ideiasRepository.save(dto.toModel(funcionariosRepository));
     }
@@ -36,5 +39,9 @@ public class IdeiasService {
         }else{
             return false;
         }
+    }
+    public Optional<Ideias> atualizarIdeias(Long id, IdeiasRequestUpdate dto){
+        return ideiasRepository.findById(id)
+                .map(i -> ideiasRepository.save(dto.toModel(i, categoriasRepository)));
     }
 }
