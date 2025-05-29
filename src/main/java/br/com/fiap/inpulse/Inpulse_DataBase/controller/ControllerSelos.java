@@ -1,9 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.SelosRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.SelosResponse;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.SelosResponseCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests.SelosResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests.SelosResponseCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.SelosService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +44,11 @@ public class ControllerSelos {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<SelosResponse> atualizarSelos(@PathVariable Long id, @RequestBody SelosRequestUpdate dto){
+        return selosService.atualizarSelos(id, dto).map(s -> new SelosResponse().toDto(s))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

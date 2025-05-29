@@ -1,6 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.SelosRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
@@ -34,5 +35,9 @@ public class SelosService {
         }else{
             return false;
         }
+    }
+    public Optional<Selos> atualizarSelos(Long id, SelosRequestUpdate dto){
+        return selosRepository.findById(id)
+                .map(s-> selosRepository.save(dto.toModel(s)));
     }
 }

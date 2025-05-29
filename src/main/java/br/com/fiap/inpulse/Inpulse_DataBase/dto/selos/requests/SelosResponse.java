@@ -1,6 +1,5 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
 
 import java.math.BigDecimal;
