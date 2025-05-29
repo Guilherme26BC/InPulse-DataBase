@@ -1,6 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class FuncionariosResponse {
     private BigDecimal moedas;
     private String tier;
     private boolean modo_anonimo;
-    private List<IdeiasResponse> ideias;
+    private List<IdeiasResponseFuncionarios> ideias;
     private List<String> programas;
     private List<String> selos;
     private List<String> logs;
@@ -34,10 +35,10 @@ public class FuncionariosResponse {
         this.setTier(funcionarios.getTier());
         this.setModo_anonimo(funcionarios.isModo_anonimo());
 
-        List<IdeiasResponse> nomesIdeias = funcionarios.getIdeias().stream()
-                .map(p-> new IdeiasResponse().toDto(p))
+        List<IdeiasResponseFuncionarios> ideias = funcionarios.getIdeias().stream()
+                .map(p-> new IdeiasResponseFuncionarios().toDto(p))
                 .collect(Collectors.toList());
-       this.setIdeias(nomesIdeias);
+       this.setIdeias(ideias);
 
         List<String> nomesProgramas = funcionarios.getProgramas().stream()
                 .map(p-> p.getNome_programa())
@@ -127,11 +128,11 @@ public class FuncionariosResponse {
         this.modo_anonimo = modo_anonimo;
     }
 
-    public List<IdeiasResponse> getIdeias() {
+    public List<IdeiasResponseFuncionarios> getIdeias() {
         return ideias;
     }
 
-    public void setIdeias(List<IdeiasResponse> ideias) {
+    public void setIdeias(List<IdeiasResponseFuncionarios> ideias) {
         this.ideias = ideias;
     }
 

@@ -28,8 +28,14 @@ public class IdeiasResponse {
         this.setImagem(ideias.getImagem());
         this.setData(ideias.getData());
         this.setCurtidas(ideias.getCurtidas());
+        String funcionarioNome;
+        if(!ideias.getFuncionario().isModo_anonimo()) {
+             funcionarioNome = ideias.getFuncionario().getPrimeiro_nome() +
+                    " " + ideias.getFuncionario().getUltimo_sobrenome();
+        }else{
+            funcionarioNome = "Anonimo";
+        }
 
-        String funcionarioNome = ideias.getFuncionario().getPrimeiro_nome() + " " +ideias.getFuncionario().getUltimo_sobrenome();
         this.setFuncionario_nome(funcionarioNome);
 
         List<String> nomesProgramas =ideias.getProgramas()
