@@ -29,4 +29,14 @@ public class ProgramasService {
     public List<Programas> buscarTodas(){
         return programasRepository.findAll();
     }
+
+    public boolean deletarPrograma(Long id){
+        if(programasRepository.existsById(id)){
+            programasRepository.deleteById(id);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

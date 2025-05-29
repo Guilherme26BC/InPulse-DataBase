@@ -38,6 +38,13 @@ public class ControllerProgramas {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPrograma(@PathVariable Long id){
+        if(programasService.deletarPrograma(id)){
+            return ResponseEntity.status(204).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
