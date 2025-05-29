@@ -26,4 +26,12 @@ public class FuncionariosService {
     public List<Funcionarios> buscarTodos(){
         return funcionariosRepository.findAll();
     }
+
+    public boolean deleteFuncionario(Long id){
+        if(funcionariosRepository.existsById(id)){
+            funcionariosRepository.deleteById(id);
+            return true;
+        }else
+            return false;
+    }
 }

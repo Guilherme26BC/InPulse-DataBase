@@ -36,4 +36,13 @@ public class ControllerFuncionarios {
         return ResponseEntity.ok().body(funcionariosService.buscarTodos().stream()
                 .map(f->new FuncionariosResponse().toModel(f)).collect(Collectors.toList()));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarFuncionario(@PathVariable Long id){
+        if(funcionariosService.deleteFuncionario(id)){
+            return ResponseEntity.status(204).build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
