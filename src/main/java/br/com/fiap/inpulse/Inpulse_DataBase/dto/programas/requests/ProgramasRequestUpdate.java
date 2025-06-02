@@ -15,7 +15,6 @@ public class ProgramasRequestUpdate {
     private String nome_programa;
     private String descricao_programa;
     private LocalDate dataFim;
-    private List<Long> funcionarios_id;
     private List<Long> ideias_id;
 
     public Programas toModel(Programas programas, FuncionariosRepository funcionariosRepository,
@@ -32,10 +31,10 @@ public class ProgramasRequestUpdate {
             programas.setDataFim(programas.getDataFim());
         else programas.setDataFim(this.getDataFim());
 
-        List<Funcionarios> aux = this.getFuncionarios_id().stream().map(f->{
-                Funcionarios funAux = funcionariosRepository.findById(f).orElseThrow(()->
-                        new RuntimeException("Funcionario inexistente: " + this.getFuncionarios_id()));
-                return funAux;
+        List<Funcionarios> aux = this.getIdeias_id().stream().map(f->{
+                Ideias funAux = ideiasRepository.findById(f).orElseThrow(()->
+                        new RuntimeException("Funcionario inexistente: " + this.getIdeias_id()));
+                return funAux.getFuncionario();
             }).collect(Collectors.toList());
             programas.setFuncionarios(aux);
 
@@ -71,14 +70,6 @@ public class ProgramasRequestUpdate {
 
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
-    }
-
-    public List<Long> getFuncionarios_id() {
-        return funcionarios_id;
-    }
-
-    public void setFuncionarios_id(List<Long> funcionarios_id) {
-        this.funcionarios_id = funcionarios_id;
     }
 
     public List<Long> getIdeias_id() {

@@ -49,10 +49,11 @@ public class FuncionariosResponse {
                 .map(p-> p.getNome())
                 .collect(Collectors.toList());
         this.setSelos(nomesSelos);
+
         List<String> nomesLogs = funcionarios.getLogs().stream()
                 .map(l->l.getEvento()).collect(Collectors.toList());
        this.setLogs(nomesLogs);
-        return this;
+       return this;
     }
 
 

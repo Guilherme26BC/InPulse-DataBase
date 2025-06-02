@@ -1,7 +1,6 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
-import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

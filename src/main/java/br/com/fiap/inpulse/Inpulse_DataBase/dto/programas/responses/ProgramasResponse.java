@@ -29,6 +29,7 @@ public class ProgramasResponse {
                 .map(p->{  return p.getPrimeiro_nome() + " " + p.getUltimo_sobrenome();
     }).collect(Collectors.toList());
         this.setFuncionarios_nome(nomesFun);
+
         List<String> nomesIdeias = programas.getIdeias().stream()
                 .map(p->{  return p.getNome();
                 }).collect(Collectors.toList());

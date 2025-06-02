@@ -1,11 +1,10 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests.SelosResponse;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests.SelosResponseCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests.SelosRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosResponseCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests.SelosRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.SelosService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

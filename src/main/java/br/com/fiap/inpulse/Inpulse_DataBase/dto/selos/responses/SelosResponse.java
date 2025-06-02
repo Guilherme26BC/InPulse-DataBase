@@ -1,4 +1,4 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
 

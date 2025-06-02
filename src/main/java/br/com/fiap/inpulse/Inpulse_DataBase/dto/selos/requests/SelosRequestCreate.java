@@ -1,38 +1,27 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.requests;
 
 
-
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class SelosResponseCreate {
-    private Long selos_id;
+public class SelosRequestCreate {
     private String nome;
     private String descricao;
     private BigInteger pontos;
     private BigDecimal moedas;
     private String icone;
 
-    public SelosResponseCreate toDto(Selos selos){
-        this.setSelos_id(selos.getSelos_id());
-        this.setNome(selos.getNome());
-        this.setDescricao(selos.getDescricao());
-        this.setPontos(selos.getPontos());
-        this.setMoedas(selos.getMoedas());
-        this.setIcone(selos.getIcone());
-        return this;
+    public Selos toModel(){
+        Selos selos = new Selos();
+        selos.setNome(this.getNome());
+        selos.setDescricao(this.getDescricao());
+        selos.setPontos(this.getPontos());
+        selos.setMoedas(this.getMoedas());
+        selos.setIcone(this.getIcone());
+        return selos;
     }
-
-    public Long getSelos_id() {
-        return selos_id;
-    }
-
-    public void setSelos_id(Long selos_id) {
-        this.selos_id = selos_id;
-    }
-
     public String getNome() {
         return nome;
     }
