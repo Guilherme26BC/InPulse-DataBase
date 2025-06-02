@@ -1,4 +1,4 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
