@@ -1,6 +1,5 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
 

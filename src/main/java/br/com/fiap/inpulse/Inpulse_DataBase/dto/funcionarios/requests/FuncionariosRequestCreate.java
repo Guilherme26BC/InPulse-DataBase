@@ -1,14 +1,10 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Selos;
 
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.List;
 
 public class FuncionariosRequestCreate {
     private String primeiro_nome;

@@ -1,8 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.FuncionariosRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.FuncionariosResponse;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.FuncionariosResponseCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.FuncionariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,13 @@ public class ControllerFuncionarios {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionariosResponse> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionariosRequestUpdate dto){
+        return funcionariosService.atualizarFuncionarios(id, dto)
+                .map(f -> new FuncionariosResponse().toModel(f))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

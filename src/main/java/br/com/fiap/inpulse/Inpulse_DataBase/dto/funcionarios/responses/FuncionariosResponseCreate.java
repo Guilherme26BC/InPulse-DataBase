@@ -1,10 +1,9 @@
-package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios;
+package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.List;
 
 public class FuncionariosResponseCreate {
     private Long funcionario_id;
