@@ -45,7 +45,7 @@ public class FuncionariosResponse {
         this.setProgramas(nomesProgramas);
 
         List<String> nomesSelos = funcionarios.getSelos().stream()
-                .map(p-> p.getNome())
+                .map(p-> p.getIcone())
                 .collect(Collectors.toList());
         this.setSelos(nomesSelos);
 
