@@ -2,7 +2,6 @@ package br.com.fiap.inpulse.Inpulse_DataBase.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -31,6 +30,11 @@ public class Ideias {
     private List<Programas> programas;
     @ManyToMany
     private List<Categorias> categorias;
+
+    @OneToMany(mappedBy = "ideia",
+            cascade =  CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Contribuicoes>contribuicoes;
 
     public Long getIdeia_id() {
         return ideia_id;
@@ -110,5 +114,13 @@ public class Ideias {
 
     public void setCategorias(List<Categorias> categorias) {
         this.categorias = categorias;
+    }
+
+    public List<Contribuicoes> getContribuicoes() {
+        return contribuicoes;
+    }
+
+    public void setContribuicoes(List<Contribuicoes> contribuicoes) {
+        this.contribuicoes = contribuicoes;
     }
 }

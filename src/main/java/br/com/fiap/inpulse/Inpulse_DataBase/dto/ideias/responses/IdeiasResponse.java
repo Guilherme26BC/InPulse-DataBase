@@ -1,5 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses;
 
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses.ContribuicoesResponseIdeias;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Contribuicoes;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 
 import java.math.BigInteger;
@@ -18,6 +20,7 @@ public class IdeiasResponse {
     private String funcionario_nome;
     private List<String> programas_nome;
     private List<String> categoriasIcone;
+    private List<ContribuicoesResponseIdeias> contribuicoes;
 
 
     public IdeiasResponse toDto(Ideias ideias){
@@ -46,6 +49,10 @@ public class IdeiasResponse {
         List<String> iconesCategorias = ideias.getCategorias().stream()
                 .map(c-> c.getIcone()).collect(Collectors.toList());
         this.setCategoriasIcone(iconesCategorias);
+
+        List<ContribuicoesResponseIdeias> response = ideias.getContribuicoes().stream()
+                .map(c-> new ContribuicoesResponseIdeias().toDto(c)).collect(Collectors.toList());
+        this.setContribuicoes(response);
         return this;
     }
 
@@ -127,5 +134,13 @@ public class IdeiasResponse {
 
     public void setCategoriasIcone(List<String> categoriasIcone) {
         this.categoriasIcone = categoriasIcone;
+    }
+
+    public List<ContribuicoesResponseIdeias> getContribuicoes() {
+        return contribuicoes;
+    }
+
+    public void setContribuicoes(List<ContribuicoesResponseIdeias> contribuicoes) {
+        this.contribuicoes = contribuicoes;
     }
 }

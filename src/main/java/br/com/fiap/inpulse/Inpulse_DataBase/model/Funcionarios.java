@@ -37,6 +37,11 @@ public class Funcionarios {
     orphanRemoval = true)
     private List<Logs>logs;
 
+    @OneToMany(mappedBy = "funcionario",
+            cascade =  CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Contribuicoes>contribuicoes;
+
     public Long getFuncionario_id() {
         return funcionario_id;
     }
@@ -139,5 +144,13 @@ public class Funcionarios {
 
     public void setLogs(List<Logs> logs) {
         this.logs = logs;
+    }
+
+    public List<Contribuicoes> getContribuicoes() {
+        return contribuicoes;
+    }
+
+    public void setContribuicoes(List<Contribuicoes> contribuicoes) {
+        this.contribuicoes = contribuicoes;
     }
 }
