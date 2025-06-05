@@ -19,15 +19,25 @@ public class FuncionariosRequestUpdate {
         BigInteger pontosAux = funcionarios.getPontos();
         BigDecimal moedasAux = funcionarios.getMoedas();
         String tier = funcionarios.getTier();
+        List<Selos> selosList =funcionarios.getSelos();
 
-        List<Selos> selosList = this.getSelos_id().stream().map(s -> {
-            Selos selosaux = selosRepository.findById(s)
-                    .orElseThrow(()-> new RuntimeException("Sello não encontrado" + s));
-
-            pontosAux.add(selosaux.getPontos());
-            moedasAux.add(selosaux.getMoedas());
-            return selosaux;
-        }).collect(Collectors.toList());
+        if(!this.getSelos_id().isEmpty()) {
+          selosList.addAll(this.getSelos_id().stream().map(s -> {
+                Selos selosaux = selosRepository.findById(s)
+                        .orElseThrow(() -> new RuntimeException("Sello não encontrado" + s));
+                return selosaux;
+            }).collect(Collectors.toList()));
+        }
+        for(Selos selo : selosList){
+            pontosAux= pontosAux.add(selo.getPontos());
+            moedasAux= moedasAux.add(selo.getMoedas());
+        }
+        if(this.getPontos().compareTo(new BigInteger("-1"))<=0){
+            pontosAux.add(this.getPontos());
+        }
+        if(this.getMoedas().compareTo(new BigDecimal(-1))<=0){
+            moedas.add(this.getMoedas());
+        }
         funcionarios.setPontos(pontosAux);
         funcionarios.setMoedas(moedasAux);
 
