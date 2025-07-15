@@ -22,7 +22,7 @@ public class IdeiasService {
     @Autowired
     private CategoriasRepository categoriasRepository;
     public Ideias criarIdeia(IdeiasRequestCreate dto){
-        return ideiasRepository.save(dto.toModel(funcionariosRepository));
+        return ideiasRepository.save(dto.toModel(funcionariosRepository,categoriasRepository));
     }
 
     public Optional<Ideias> buscarIdeiaPorId(Long id){
@@ -42,6 +42,6 @@ public class IdeiasService {
     }
     public Optional<Ideias> atualizarIdeias(Long id, IdeiasRequestUpdate dto){
         return ideiasRepository.findById(id)
-                .map(i -> ideiasRepository.save(dto.toModel(i, categoriasRepository)));
+                .map(i -> ideiasRepository.save(dto.toModel(i)));
     }
 }
