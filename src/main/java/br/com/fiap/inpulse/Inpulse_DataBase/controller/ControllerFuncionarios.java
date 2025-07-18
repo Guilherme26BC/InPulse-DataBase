@@ -37,6 +37,12 @@ public class ControllerFuncionarios {
         return ResponseEntity.ok().body(funcionariosService.buscarTodos().stream()
                 .map(f->new FuncionariosResponse().toModel(f)).collect(Collectors.toList()));
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<FuncionariosResponse> buscarPorEmail(@PathVariable String email){
+        return funcionariosService.buscarFuncionarioPorEmail(email).map(f-> new FuncionariosResponse().toModel(f))
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarFuncionario(@PathVariable Long id){
         if(funcionariosService.deleteFuncionario(id)){

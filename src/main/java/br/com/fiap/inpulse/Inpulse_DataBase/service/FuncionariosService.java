@@ -42,4 +42,7 @@ public class FuncionariosService {
         return funcionariosRepository.findById(id)
                 .map( f -> funcionariosRepository.save(dto.toModel(f, selosRepository)));
     }
+    public Optional<Funcionarios> buscarFuncionarioPorEmail(String email){
+        return funcionariosRepository.findByEmail(email);
+    }
 }
