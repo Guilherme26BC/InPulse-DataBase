@@ -5,6 +5,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpd
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.IdeiasService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,11 @@ public class ControllerIdeias {
         return ideiasService.atualizarIdeias(id, dto).map(i -> new IdeiasResponse().toDto(i))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/funcionarios/{id}")
+    public ResponseEntity<List<IdeiasResponse>> buscarIdeiaFuncionario(@PathVariable Long id){
+        return ResponseEntity.ok().body(ideiasService.buscarPorFuncionario(id).stream()
+                .map(i -> new IdeiasResponse().toDto(i)).collect(Collectors.toList()));
     }
 }

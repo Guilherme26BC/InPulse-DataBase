@@ -2,6 +2,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.CategoriasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
@@ -43,5 +44,10 @@ public class IdeiasService {
     public Optional<Ideias> atualizarIdeias(Long id, IdeiasRequestUpdate dto){
         return ideiasRepository.findById(id)
                 .map(i -> ideiasRepository.save(dto.toModel(i)));
+    }
+
+    public List<Ideias> buscarPorFuncionario(Long id){
+        return ideiasRepository.findByFuncionario(funcionariosRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Funcionario inexistente: " + id)));
     }
 }
