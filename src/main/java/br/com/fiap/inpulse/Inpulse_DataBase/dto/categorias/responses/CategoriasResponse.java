@@ -14,7 +14,7 @@ public class CategoriasResponse {
 
 public CategoriasResponse toDto(Categorias categorias){
     this.setCategoria_id(categorias.getCategoria_id());
-    this.setIcone(categorias.getTipo());
+    this.setIcone(categorias.getIcone());
     this.setNome(categorias.getNome());
     this.setTipo(categorias.getTipo());
     List<String> nomes = categorias.getIdeias()
