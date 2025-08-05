@@ -18,6 +18,7 @@ public class FuncionariosResponse {
     private BigDecimal moedas;
     private String tier;
     private boolean modo_anonimo;
+    private String imagem_funcionario;
     private List<IdeiasResponseFuncionarios> ideias;
     private List<String> programas;
     private List<String> selos;
@@ -33,6 +34,7 @@ public class FuncionariosResponse {
         this.setMoedas(funcionarios.getMoedas());
         this.setTier(funcionarios.getTier());
         this.setModo_anonimo(funcionarios.isModo_anonimo());
+        this.setImagem_funcionario(funcionarios.getImagem_funcionario());
 
         List<IdeiasResponseFuncionarios> ideias = funcionarios.getIdeias().stream()
                 .map(p-> new IdeiasResponseFuncionarios().toDto(p))
@@ -158,5 +160,13 @@ public class FuncionariosResponse {
 
     public void setLogs(List<String> logs) {
         this.logs = logs;
+    }
+
+    public String getImagem_funcionario() {
+        return imagem_funcionario;
+    }
+
+    public void setImagem_funcionario(String imagem_funcionario) {
+        this.imagem_funcionario = imagem_funcionario;
     }
 }

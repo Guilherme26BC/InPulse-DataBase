@@ -15,6 +15,7 @@ public class FuncionariosResponseCreate {
     private BigDecimal moedas;
     private String tier;
     private boolean modo_anonimo;
+    private String imagem_funcionario;
 
     public FuncionariosResponseCreate toModel(Funcionarios funcionarios){
         this.setFuncionario_id(funcionarios.getFuncionario_id());
@@ -26,6 +27,7 @@ public class FuncionariosResponseCreate {
         this.setMoedas(funcionarios.getMoedas());
         this.setTier(funcionarios.getTier());
         this.setModo_anonimo(funcionarios.isModo_anonimo());
+        this.setImagem_funcionario(funcionarios.getImagem_funcionario());
         return this;
     }
     public Long getFuncionario_id() {
@@ -98,5 +100,13 @@ public class FuncionariosResponseCreate {
 
     public void setModo_anonimo(boolean modo_anonimo) {
         this.modo_anonimo = modo_anonimo;
+    }
+
+    public String getImagem_funcionario() {
+        return imagem_funcionario;
+    }
+
+    public void setImagem_funcionario(String imagem_funcionario) {
+        this.imagem_funcionario = imagem_funcionario;
     }
 }

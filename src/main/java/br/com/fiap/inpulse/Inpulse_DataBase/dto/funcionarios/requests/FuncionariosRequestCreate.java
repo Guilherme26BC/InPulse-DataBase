@@ -12,6 +12,7 @@ public class FuncionariosRequestCreate {
     private String email;
     private String senha;
     private boolean modo_anonimo;
+    private String imagem_funcionario;
 
     public Funcionarios toModel(){
         Funcionarios funcionarios = new Funcionarios();
@@ -23,6 +24,7 @@ public class FuncionariosRequestCreate {
         funcionarios.setMoedas(new BigDecimal(0));
         funcionarios.setTier("Bronze");
         funcionarios.setModo_anonimo(this.isModo_anonimo());
+        funcionarios.setImagem_funcionario(this.getImagem_funcionario());
         return funcionarios;
     }
 
@@ -64,5 +66,13 @@ public class FuncionariosRequestCreate {
 
     public void setModo_anonimo(boolean modo_anonimo) {
         this.modo_anonimo = modo_anonimo;
+    }
+
+    public String getImagem_funcionario() {
+        return imagem_funcionario;
+    }
+
+    public void setImagem_funcionario(String imagem_funcionario) {
+        this.imagem_funcionario = imagem_funcionario;
     }
 }
