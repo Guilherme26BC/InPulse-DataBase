@@ -14,6 +14,7 @@ public class Funcionarios {
 
     private String primeiro_nome;
     private String ultimo_sobrenome;
+    private String imagem_funcionario;
 
     @Column(unique = true)
     private String email;
@@ -112,6 +113,14 @@ public class Funcionarios {
 
     public void setModo_anonimo(boolean modo_anonimo) {
         this.modo_anonimo = modo_anonimo;
+    }
+
+    public String getImagem_funcionario() {
+        return imagem_funcionario;
+    }
+
+    public void setImagem_funcionario(String imagem_funcionario) {
+        this.imagem_funcionario = imagem_funcionario;
     }
 
     public List<Ideias> getIdeias() {
