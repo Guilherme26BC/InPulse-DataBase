@@ -2,6 +2,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateImagem;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
@@ -18,6 +19,7 @@ public class FuncionariosService {
     private FuncionariosRepository funcionariosRepository;
     @Autowired
     private SelosRepository selosRepository;
+
     public Funcionarios criarFuncionario(FuncionariosRequestCreate dto){
         return funcionariosRepository.save(dto.toModel());
     }
@@ -41,6 +43,9 @@ public class FuncionariosService {
     public Optional<Funcionarios> atualizarFuncionarios(Long id, FuncionariosRequestUpdate dto){
         return funcionariosRepository.findById(id)
                 .map( f -> funcionariosRepository.save(dto.toModel(f, selosRepository)));
+    }
+    public Optional<Funcionarios> atualizarImagem(Long id, FuncionariosRequestUpdateImagem dto){
+        return funcionariosRepository.findById(id).map(f -> funcionariosRepository.save(dto.toModel(f)));
     }
     public Optional<Funcionarios> buscarFuncionarioPorEmail(String email){
         return funcionariosRepository.findByEmail(email);
