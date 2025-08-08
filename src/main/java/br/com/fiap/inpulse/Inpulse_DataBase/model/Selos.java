@@ -15,6 +15,7 @@ public class Selos {
     private String descricao;
     private BigInteger pontos;
     private BigDecimal moedas;
+
     @Column(unique = true)
     private String icone;
 
