@@ -3,8 +3,10 @@ package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateImagem;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateSenha;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponseCreate;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.FuncionariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +64,14 @@ public class ControllerFuncionarios {
     @PutMapping("/imagem/{id}")
     public ResponseEntity<FuncionariosResponse> atualizarImagemFuncionario(@PathVariable Long id, @RequestBody FuncionariosRequestUpdateImagem dto){
         return funcionariosService.atualizarImagem(id, dto)
+                .map(f-> new FuncionariosResponse().toModel(f))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("senha/{id}")
+    public ResponseEntity<FuncionariosResponse> atualizarSenhaFuncionario(@PathVariable Long id, @RequestBody FuncionariosRequestUpdateSenha dto){
+        return funcionariosService.atualizarSenha(id,dto)
                 .map(f-> new FuncionariosResponse().toModel(f))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

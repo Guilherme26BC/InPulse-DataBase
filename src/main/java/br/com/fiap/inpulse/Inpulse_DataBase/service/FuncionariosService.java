@@ -3,6 +3,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateImagem;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateSenha;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
@@ -45,7 +46,12 @@ public class FuncionariosService {
                 .map( f -> funcionariosRepository.save(dto.toModel(f, selosRepository)));
     }
     public Optional<Funcionarios> atualizarImagem(Long id, FuncionariosRequestUpdateImagem dto){
-        return funcionariosRepository.findById(id).map(f -> funcionariosRepository.save(dto.toModel(f)));
+        return funcionariosRepository.findById(id).
+                map(f -> funcionariosRepository.save(dto.toModel(f)));
+    }
+    public Optional<Funcionarios> atualizarSenha(Long id, FuncionariosRequestUpdateSenha dto){
+        return funcionariosRepository.findById(id)
+                .map(f -> funcionariosRepository.save(dto.toModel(f)));
     }
     public Optional<Funcionarios> buscarFuncionarioPorEmail(String email){
         return funcionariosRepository.findByEmail(email);
