@@ -12,19 +12,17 @@ public class FuncionariosRequestCreate {
     private String email;
     private String senha;
     private boolean modo_anonimo;
-    private String imagem_funcionario;
 
-    public Funcionarios toModel(){
+    public Funcionarios toModel() {
         Funcionarios funcionarios = new Funcionarios();
         funcionarios.setPrimeiro_nome(this.getPrimeiro_nome());
         funcionarios.setUltimo_sobrenome(this.getUltimo_sobrenome());
         funcionarios.setEmail(this.getEmail());
         funcionarios.setSenha(this.getSenha());
-        funcionarios.setPontos( new BigInteger("0"));
+        funcionarios.setPontos(new BigInteger("0"));
         funcionarios.setMoedas(new BigDecimal(0));
         funcionarios.setTier("Bronze");
         funcionarios.setModo_anonimo(this.isModo_anonimo());
-        funcionarios.setImagem_funcionario(this.getImagem_funcionario());
         return funcionarios;
     }
 
@@ -66,13 +64,5 @@ public class FuncionariosRequestCreate {
 
     public void setModo_anonimo(boolean modo_anonimo) {
         this.modo_anonimo = modo_anonimo;
-    }
-
-    public String getImagem_funcionario() {
-        return imagem_funcionario;
-    }
-
-    public void setImagem_funcionario(String imagem_funcionario) {
-        this.imagem_funcionario = imagem_funcionario;
     }
 }
