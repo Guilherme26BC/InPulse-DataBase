@@ -2,6 +2,8 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateFuncionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateIdeias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
@@ -44,6 +46,15 @@ public class ProgramasService {
     }
     public Optional<Programas> atualizarPrograma(Long id, ProgramasRequestUpdate dto){
         return programasRepository.findById(id)
-                .map(p-> programasRepository.save(dto.toModel(p, funcionariosRepository, ideiasRepositorys)));
+                .map(p-> programasRepository.save(dto.toModel(p, funcionariosRepository)));
+    }
+    public Optional<Programas> atualizarProgramaIdeia(Long id, ProgramasRequestUpdateIdeias dto){
+        return programasRepository.findById(id)
+                .map(p-> programasRepository.save(dto.toModel(p,ideiasRepositorys)));
+    }
+
+    public Optional<Programas> atualizarProgramaFuncionario(Long id, ProgramasRequestUpdateFuncionarios dto){
+        return programasRepository.findById(id)
+                .map(p -> programasRepository.save(dto.toModel(p,funcionariosRepository)));
     }
 }

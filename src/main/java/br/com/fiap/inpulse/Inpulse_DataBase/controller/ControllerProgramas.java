@@ -2,9 +2,12 @@ package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateFuncionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateIdeias;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.ProgramasService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +56,19 @@ public class ControllerProgramas {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/ideias/{id}")
+    public ResponseEntity<ProgramasResponse> atualizarProgramaIdeia(@PathVariable Long id, @RequestBody ProgramasRequestUpdateIdeias dto){
+        return programasService.atualizarProgramaIdeia(id, dto)
+                .map(p-> new ProgramasResponse().toDto(p))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    @PutMapping("/funcionarios/{id}")
+    public ResponseEntity<ProgramasResponse> atualizarProgramasFuncionarios(@PathVariable Long id, @RequestBody ProgramasRequestUpdateFuncionarios dto){
+        return programasService.atualizarProgramaFuncionario(id,dto)
+                .map(p -> new ProgramasResponse().toDto(p))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
 }
