@@ -1,6 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseFuncionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
 
 import java.math.BigDecimal;
@@ -21,7 +22,7 @@ public class FuncionariosResponse {
     private String imagem_funcionario;
     private List<IdeiasResponseFuncionarios> ideias;
     private List<String> programas;
-    private List<String> selos;
+    private List<SelosResponseFuncionarios> selos;
     private List<String> logs;
 
     public FuncionariosResponse toModel(Funcionarios funcionarios){
@@ -46,8 +47,8 @@ public class FuncionariosResponse {
                 .collect(Collectors.toList());
         this.setProgramas(nomesProgramas);
 
-        List<String> nomesSelos = funcionarios.getSelos().stream()
-                .map(p-> p.getIcone())
+        List<SelosResponseFuncionarios> nomesSelos = funcionarios.getSelos().stream()
+                .map(p-> new SelosResponseFuncionarios().toDto(p))
                 .collect(Collectors.toList());
         this.setSelos(nomesSelos);
 
@@ -146,11 +147,11 @@ public class FuncionariosResponse {
         this.programas = programas;
     }
 
-    public List<String> getSelos() {
+    public List<SelosResponseFuncionarios> getSelos() {
         return selos;
     }
 
-    public void setSelos(List<String> selos) {
+    public void setSelos(List<SelosResponseFuncionarios> selos) {
         this.selos = selos;
     }
 
