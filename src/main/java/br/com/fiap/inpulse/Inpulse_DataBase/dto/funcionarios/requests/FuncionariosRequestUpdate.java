@@ -50,6 +50,7 @@ public class FuncionariosRequestUpdate {
         }
 
         funcionarios.setTier(tier);
+        funcionarios.setModo_anonimo(isModo_anonimo());
         funcionarios.setSelos(selosList);
         return funcionarios;
     }
