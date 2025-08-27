@@ -42,11 +42,11 @@ public class FuncionariosRequestUpdate {
         funcionarios.setMoedas(moedasAux);
 
         if(funcionarios.getPontos().compareTo(new BigInteger("5")) >= 0){
-           tier = "prata";
+           tier = "Prata";
         }
 
         if(funcionarios.getPontos().compareTo(new BigInteger("10")) >= 0){
-            tier = "ouro";
+            tier = "Ouro";
         }
 
         funcionarios.setTier(tier);
