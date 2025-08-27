@@ -33,10 +33,10 @@ public class FuncionariosRequestUpdate {
             moedasAux= moedasAux.add(selo.getMoedas());
         }
         if(this.getPontos().compareTo(new BigInteger("-1"))<=0){
-            pontosAux.add(this.getPontos());
+           pontosAux= pontosAux.add(this.getPontos());
         }
         if(this.getMoedas().compareTo(new BigDecimal(-1))<=0){
-            moedas.add(this.getMoedas());
+           moedasAux= moedas.add(this.getMoedas());
         }
         funcionarios.setPontos(pontosAux);
         funcionarios.setMoedas(moedasAux);
