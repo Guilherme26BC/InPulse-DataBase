@@ -1,6 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseFuncionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
 
@@ -21,7 +22,7 @@ public class FuncionariosResponse {
     private boolean modo_anonimo;
     private String imagem_funcionario;
     private List<IdeiasResponseFuncionarios> ideias;
-    private List<String> programas;
+    private List<ProgramasResponseIF> programas;
     private List<SelosResponseFuncionarios> selos;
     private List<String> logs;
 
@@ -42,8 +43,8 @@ public class FuncionariosResponse {
                 .collect(Collectors.toList());
        this.setIdeias(ideias);
 
-        List<String> nomesProgramas = funcionarios.getProgramas().stream()
-                .map(p-> p.getNome_programa())
+        List<ProgramasResponseIF> nomesProgramas = funcionarios.getProgramas().stream()
+                .map(p-> new ProgramasResponseIF().toDto(p))
                 .collect(Collectors.toList());
         this.setProgramas(nomesProgramas);
 
@@ -139,11 +140,11 @@ public class FuncionariosResponse {
         this.ideias = ideias;
     }
 
-    public List<String> getProgramas() {
+    public List<ProgramasResponseIF> getProgramas() {
         return programas;
     }
 
-    public void setProgramas(List<String> programas) {
+    public void setProgramas(List<ProgramasResponseIF> programas) {
         this.programas = programas;
     }
 

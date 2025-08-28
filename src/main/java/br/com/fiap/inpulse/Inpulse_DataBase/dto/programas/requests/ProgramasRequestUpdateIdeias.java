@@ -8,23 +8,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProgramasRequestUpdateIdeias {
-    private List<Long> ideias_id;
+    private Long ideias_id;
 
     public Programas toModel(Programas programas, IdeiasRepository ideiasRepository){
-        List<Ideias> auxi =this.getIdeias_id().stream().map(i->{
-            Ideias ideAux = ideiasRepository.findById(i).orElseThrow(()->
-                    new RuntimeException("ideia inexistente: " + this.getIdeias_id()));
-            return ideAux;
-        }).collect(Collectors.toList());
-        programas.setIdeias(auxi);
+        Ideias ideAux = ideiasRepository.findById(this.getIdeias_id()).orElseThrow(()->
+                new RuntimeException("ideia inexistente: " + this.getIdeias_id()));
+        programas.getIdeias().add(ideAux);
         return programas;
     }
 
-    public List<Long> getIdeias_id() {
+    public Long getIdeias_id() {
         return ideias_id;
     }
 
-    public void setIdeias_id(List<Long> ideias_id) {
+    public void setIdeias_id(Long ideias_id) {
         this.ideias_id = ideias_id;
     }
 }

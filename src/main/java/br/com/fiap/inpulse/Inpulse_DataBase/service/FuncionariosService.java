@@ -5,7 +5,9 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.Funcionari
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateImagem;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateSenha;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.ProgramasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class FuncionariosService {
     private FuncionariosRepository funcionariosRepository;
     @Autowired
     private SelosRepository selosRepository;
+    @Autowired
+    private ProgramasRepository programasRepository;
 
     public Funcionarios criarFuncionario(FuncionariosRequestCreate dto){
         return funcionariosRepository.save(dto.toModel());
@@ -55,5 +59,10 @@ public class FuncionariosService {
     }
     public Optional<Funcionarios> buscarFuncionarioPorEmail(String email){
         return funcionariosRepository.findByEmail(email);
+    }
+    public Funcionarios atualizarPrograma(Long idPrograma, Long idFuncionario){
+        Programas programa = programasRepository.findById(idPrograma).orElseThrow(() -> new RuntimeException());
+        Funcionarios fun = funcionariosRepository.findById(idFuncionario).orElseThrow() ;
+        return funcionariosRepository.save(fun);
     }
 }

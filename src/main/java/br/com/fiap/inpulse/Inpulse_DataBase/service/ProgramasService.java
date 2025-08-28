@@ -4,6 +4,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequ
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateIdeias;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
@@ -22,6 +23,8 @@ public class ProgramasService {
     private FuncionariosRepository funcionariosRepository;
     @Autowired
     private IdeiasRepository ideiasRepositorys;
+    @Autowired
+    private FuncionariosService funcionariosService;
 
     public Programas criarPrograma(ProgramasRequestCreate dto){
         return programasRepository.save(dto.toModel());
@@ -54,6 +57,7 @@ public class ProgramasService {
     }
 
     public Optional<Programas> atualizarProgramaFuncionario(Long id, ProgramasRequestUpdateFuncionarios dto){
+            funcionariosService.atualizarPrograma(id, dto.getFuncionarios_id());
         return programasRepository.findById(id)
                 .map(p -> programasRepository.save(dto.toModel(p,funcionariosRepository)));
     }
