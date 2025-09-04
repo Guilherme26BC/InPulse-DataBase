@@ -4,9 +4,11 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestCre
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.CategoriasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.ProgramasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class IdeiasService {
     private FuncionariosRepository funcionariosRepository;
     @Autowired
     private CategoriasRepository categoriasRepository;
+    @Autowired
+    private ProgramasRepository programasRepository;
     public Ideias criarIdeia(IdeiasRequestCreate dto){
         return ideiasRepository.save(dto.toModel(funcionariosRepository,categoriasRepository));
     }
@@ -50,4 +54,10 @@ public class IdeiasService {
         return ideiasRepository.findByFuncionario(funcionariosRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Funcionario inexistente: " + id)));
     }
+    public Ideias atualizarPrograma(Long idPrograma, Long idFuncionario){
+        Programas programas = programasRepository.findById(idPrograma).orElseThrow(() -> new RuntimeException());
+        Ideias ids = ideiasRepository.findById(idFuncionario).orElseThrow(() -> new RuntimeException());
+        return ideiasRepository.save(ids);
+    }
+
 }

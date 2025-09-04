@@ -52,6 +52,7 @@ public class ProgramasService {
                 .map(p-> programasRepository.save(dto.toModel(p, funcionariosRepository)));
     }
     public Optional<Programas> atualizarProgramaIdeia(Long id, ProgramasRequestUpdateIdeias dto){
+        funcionariosService.atualizarPrograma(id, dto.getIdeias_id());
         return programasRepository.findById(id)
                 .map(p-> programasRepository.save(dto.toModel(p,ideiasRepositorys)));
     }
