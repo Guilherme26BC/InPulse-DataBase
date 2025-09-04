@@ -1,6 +1,8 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses.ContribuicoesResponseIdeias;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Contribuicoes;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 
@@ -18,7 +20,7 @@ public class IdeiasResponse {
     private LocalDate data;
     private BigInteger curtidas;
     private String funcionario_nome;
-    private List<String> programas_nome;
+    private List<ProgramasResponseIF> programas_nome;
     private List<String> categoriasIcone;
     private List<ContribuicoesResponseIdeias> contribuicoes;
 
@@ -41,9 +43,9 @@ public class IdeiasResponse {
 
         this.setFuncionario_nome(funcionarioNome);
 
-        List<String> nomesProgramas =ideias.getProgramas()
+        List<ProgramasResponseIF> nomesProgramas =ideias.getProgramas()
                 .stream()
-                .map(p-> p.getNome_programa()).collect(Collectors.toList());
+                .map(p->new ProgramasResponseIF().toDto(p)).collect(Collectors.toList());
         this.setProgramas_nome(nomesProgramas);
 
         List<String> iconesCategorias = ideias.getCategorias().stream()
@@ -120,11 +122,11 @@ public class IdeiasResponse {
         this.funcionario_nome = funcionario_nome;
     }
 
-    public List<String> getProgramas_nome() {
+    public List<ProgramasResponseIF> getProgramas_nome() {
         return programas_nome;
     }
 
-    public void setProgramas_nome(List<String> programas_nome) {
+    public void setProgramas_nome(List<ProgramasResponseIF> programas_nome) {
         this.programas_nome = programas_nome;
     }
 
