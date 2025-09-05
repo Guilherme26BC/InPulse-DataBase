@@ -25,6 +25,8 @@ public class ProgramasService {
     private IdeiasRepository ideiasRepositorys;
     @Autowired
     private FuncionariosService funcionariosService;
+    @Autowired
+    private IdeiasService ideiasService;
 
     public Programas criarPrograma(ProgramasRequestCreate dto){
         return programasRepository.save(dto.toModel());
@@ -52,13 +54,13 @@ public class ProgramasService {
                 .map(p-> programasRepository.save(dto.toModel(p, funcionariosRepository)));
     }
     public Optional<Programas> atualizarProgramaIdeia(Long id, ProgramasRequestUpdateIdeias dto){
-        funcionariosService.atualizarPrograma(id, dto.getIdeias_id());
+        ideiasService.atualizarPrograma(id, dto.getIdeias_id());
         return programasRepository.findById(id)
                 .map(p-> programasRepository.save(dto.toModel(p,ideiasRepositorys)));
     }
 
     public Optional<Programas> atualizarProgramaFuncionario(Long id, ProgramasRequestUpdateFuncionarios dto){
-            funcionariosService.atualizarPrograma(id, dto.getFuncionarios_id());
+          funcionariosService.atualizarPrograma(id, dto.getFuncionarios_id());
         return programasRepository.findById(id)
                 .map(p -> programasRepository.save(dto.toModel(p,funcionariosRepository)));
     }
