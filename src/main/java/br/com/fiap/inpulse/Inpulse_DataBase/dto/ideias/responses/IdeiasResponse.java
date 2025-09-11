@@ -1,6 +1,7 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses.ContribuicoesResponseIdeias;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponseIdeias;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Contribuicoes;
@@ -19,7 +20,7 @@ public class IdeiasResponse {
     private String imagem;
     private LocalDate data;
     private BigInteger curtidas;
-    private String funcionario_nome;
+    private FuncionariosResponseIdeias funcionario_nome;
     private List<ProgramasResponseIF> programas_nome;
     private List<String> categoriasIcone;
     private List<ContribuicoesResponseIdeias> contribuicoes;
@@ -33,19 +34,12 @@ public class IdeiasResponse {
         this.setImagem(ideias.getImagem());
         this.setData(ideias.getData());
         this.setCurtidas(ideias.getCurtidas());
-        String funcionarioNome;
-        if(!ideias.getFuncionario().isModo_anonimo()) {
-             funcionarioNome = ideias.getFuncionario().getPrimeiro_nome() +
-                    " " + ideias.getFuncionario().getUltimo_sobrenome();
-        }else{
-            funcionarioNome = "Anonimo";
-        }
 
-        this.setFuncionario_nome(funcionarioNome);
+        this.setFuncionario_nome(new FuncionariosResponseIdeias().toDto(ideias.getFuncionario()));
 
-        List<ProgramasResponseIF> nomesProgramas =ideias.getProgramas()
-                .stream()
-                .map(p->new ProgramasResponseIF().toDto(p)).collect(Collectors.toList());
+        List<ProgramasResponseIF> nomesProgramas = ideias.getProgramas().stream()
+                .map(p-> new ProgramasResponseIF().toDto(p))
+                .collect(Collectors.toList());
         this.setProgramas_nome(nomesProgramas);
 
         List<String> iconesCategorias = ideias.getCategorias().stream()
@@ -114,11 +108,11 @@ public class IdeiasResponse {
         this.curtidas = curtidas;
     }
 
-    public String getFuncionario_nome() {
+    public FuncionariosResponseIdeias getFuncionario_nome() {
         return funcionario_nome;
     }
 
-    public void setFuncionario_nome(String funcionario_nome) {
+    public void setFuncionario_nome(FuncionariosResponseIdeias funcionario_nome) {
         this.funcionario_nome = funcionario_nome;
     }
 

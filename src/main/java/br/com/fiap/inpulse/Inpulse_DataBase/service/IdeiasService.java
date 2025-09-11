@@ -54,9 +54,10 @@ public class IdeiasService {
         return ideiasRepository.findByFuncionario(funcionariosRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Funcionario inexistente: " + id)));
     }
-    public Ideias atualizarPrograma(Long idPrograma, Long idFuncionario){
+    public Ideias atualizarPrograma(Long idPrograma, Long idIdeias){
         Programas programas = programasRepository.findById(idPrograma).orElseThrow(() -> new RuntimeException());
-        Ideias ids = ideiasRepository.findById(idFuncionario).orElseThrow(() -> new RuntimeException());
+        Ideias ids = ideiasRepository.findById(idIdeias).orElseThrow();
+        ids.getProgramas().add(programas);
         return ideiasRepository.save(ids);
     }
 

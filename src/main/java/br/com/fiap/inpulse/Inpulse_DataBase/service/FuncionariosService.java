@@ -62,7 +62,8 @@ public class FuncionariosService {
     }
     public Funcionarios atualizarPrograma(Long idPrograma, Long idFuncionario){
         Programas programa = programasRepository.findById(idPrograma).orElseThrow(() -> new RuntimeException());
-        Funcionarios fun = funcionariosRepository.findById(idFuncionario).orElseThrow() ;
+        Funcionarios fun = funcionariosRepository.findById(idFuncionario).orElseThrow();
+        fun.getProgramas().add(programa);
         return funcionariosRepository.save(fun);
     }
 }

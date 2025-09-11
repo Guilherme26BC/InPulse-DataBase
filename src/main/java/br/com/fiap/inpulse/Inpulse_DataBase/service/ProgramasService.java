@@ -53,12 +53,16 @@ public class ProgramasService {
         return programasRepository.findById(id)
                 .map(p-> programasRepository.save(dto.toModel(p, funcionariosRepository)));
     }
+//    public Optional<Programas> atualizarProgramaIdeia(Long id, ProgramasRequestUpdateIdeias dto){
+//        ideiasService.atualizarPrograma(id, dto.getIdeias_id());
+//        return programasRepository.findById(id)
+//                .map(p-> programasRepository.save(dto.toModel(p,ideiasRepositorys)));
+//    }
     public Optional<Programas> atualizarProgramaIdeia(Long id, ProgramasRequestUpdateIdeias dto){
-        ideiasService.atualizarPrograma(id, dto.getIdeias_id());
+        ideiasService.atualizarPrograma(id,dto.getIdeias_id());
         return programasRepository.findById(id)
-                .map(p-> programasRepository.save(dto.toModel(p,ideiasRepositorys)));
+                .map(p -> programasRepository.save(dto.toModel(p,ideiasRepositorys)));
     }
-
     public Optional<Programas> atualizarProgramaFuncionario(Long id, ProgramasRequestUpdateFuncionarios dto){
           funcionariosService.atualizarPrograma(id, dto.getFuncionarios_id());
         return programasRepository.findById(id)
