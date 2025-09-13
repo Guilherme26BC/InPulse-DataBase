@@ -1,9 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateImagem;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateSenha;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.*;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
@@ -72,6 +69,13 @@ public class ControllerFuncionarios {
     @PutMapping("senha/{id}")
     public ResponseEntity<FuncionariosResponse> atualizarSenhaFuncionario(@PathVariable Long id, @RequestBody FuncionariosRequestUpdateSenha dto){
         return funcionariosService.atualizarSenha(id,dto)
+                .map(f-> new FuncionariosResponse().toModel(f))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    @PutMapping("item/{id}")
+    public ResponseEntity<FuncionariosResponse> atualizarItemFuncionario(@PathVariable Long id, @RequestBody FuncionariosRequestUpdateItem dto){
+        return funcionariosService.atualizarItens(id,dto)
                 .map(f-> new FuncionariosResponse().toModel(f))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

@@ -23,7 +23,7 @@ public class Programas {
     private List<Funcionarios> funcionarios;
 
     @ManyToMany
-    @JoinTable(name = "ideias_funcionarios",
+    @JoinTable(name = "programas_ideias",
             joinColumns = @JoinColumn(name = "ideias"),
             inverseJoinColumns = @JoinColumn(name = "programas"))
     private List<Ideias> ideias;

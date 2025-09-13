@@ -1,17 +1,16 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestCreate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateImagem;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdateSenha;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.*;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.ItemRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.ProgramasRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +23,8 @@ public class FuncionariosService {
     private SelosRepository selosRepository;
     @Autowired
     private ProgramasRepository programasRepository;
+    @Autowired
+    private ItemRepository itemRepository;
 
     public Funcionarios criarFuncionario(FuncionariosRequestCreate dto){
         return funcionariosRepository.save(dto.toModel());
@@ -65,5 +66,9 @@ public class FuncionariosService {
         Funcionarios fun = funcionariosRepository.findById(idFuncionario).orElseThrow();
         fun.getProgramas().add(programa);
         return funcionariosRepository.save(fun);
+    }
+    public Optional<Funcionarios> atualizarItens(Long id, FuncionariosRequestUpdateItem dto){
+        return funcionariosRepository.findById(id)
+                .map(f -> funcionariosRepository.save(dto.toModel(f,itemRepository)));
     }
 }

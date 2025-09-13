@@ -1,6 +1,8 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseFuncionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponseFuncionario;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
@@ -24,6 +26,7 @@ public class FuncionariosResponse {
     private List<IdeiasResponseFuncionarios> ideias;
     private List<ProgramasResponseIF> programas;
     private List<SelosResponseFuncionarios> selos;
+    private List<ItemResponseFuncionario> itens;
     private List<String> logs;
 
     public FuncionariosResponse toModel(Funcionarios funcionarios){
@@ -53,6 +56,10 @@ public class FuncionariosResponse {
                 .collect(Collectors.toList());
         this.setSelos(nomesSelos);
 
+        List<ItemResponseFuncionario> itensR = funcionarios.getItens().stream()
+                .map(i-> new ItemResponseFuncionario().toDto(i))
+                .collect(Collectors.toList());
+        this.setItens(itensR);
         List<String> nomesLogs = funcionarios.getLogs().stream()
                 .map(l->l.getEvento()).collect(Collectors.toList());
        this.setLogs(nomesLogs);
@@ -170,5 +177,13 @@ public class FuncionariosResponse {
 
     public void setImagem_funcionario(String imagem_funcionario) {
         this.imagem_funcionario = imagem_funcionario;
+    }
+
+    public List<ItemResponseFuncionario> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemResponseFuncionario> itens) {
+        this.itens = itens;
     }
 }

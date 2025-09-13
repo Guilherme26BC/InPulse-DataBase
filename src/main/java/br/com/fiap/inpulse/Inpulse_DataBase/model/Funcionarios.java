@@ -30,7 +30,10 @@ public class Funcionarios {
     private List<Ideias> ideias;
     @ManyToMany(mappedBy = "funcionarios")
     private List<Programas> programas;
+    @ManyToMany(mappedBy = "funcionarios")
 
+    private List<Item> itens;
+    //adicionar missões cumpridas
     @ManyToMany
     private List<Selos> selos;
     @OneToMany(mappedBy = "funcionarios",
@@ -161,5 +164,12 @@ public class Funcionarios {
 
     public void setContribuicoes(List<Contribuicoes> contribuicoes) {
         this.contribuicoes = contribuicoes;
+    }
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
     }
 }
