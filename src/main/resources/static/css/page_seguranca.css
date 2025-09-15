@@ -1,0 +1,37 @@
+.table {
+    border: none;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.table thead th {
+    border-bottom: 1px solid #dee2e6;
+    border-top: none;
+}
+
+.table td,
+.table th {
+    padding: 0.75rem;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.8;
+    background-color: rgb(70, 106, 134);
+    border-radius: 12px;
+}
+

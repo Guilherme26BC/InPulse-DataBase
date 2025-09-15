@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inPulse - Login</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS customizado -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body style="background-color: #f8f9fa;">
+
+    <!-- Navbar simplificada para a tela de login -->
+    <nav class="navbar navbar-dark" style="background-color: #1a3a52;">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-3 mx-auto" href="#">
+                <span style="color: #ffd700;">in</span><span class="text-white">Pulse</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Container do formulário de login -->
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: calc(100vh - 72px);">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4 p-md-5">
+
+                        <div class="text-center mb-4">
+                            <h2 class="mb-3" style="color: #1a3a52; font-weight: 600;">Acessar Painel</h2>
+                        </div>
+
+                        <!-- Mensagem de erro -->
+                        <div id="error-message" class="alert alert-danger d-none" role="alert"></div>
+
+                        <form id="login-form">
+                            <!-- Campo de E-mail ou Matrícula -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="username" placeholder="E-mail ou Matrícula" required>
+                                <label for="username">
+                                    <i class="fas fa-user me-2"></i>E-mail ou Matrícula
+                                </label>
+                            </div>
+
+                            <!-- Campo de Senha -->
+                            <div class="form-floating mb-4">
+                                <input type="password" class="form-control" id="password" placeholder="Sua senha" required>
+                                <label for="password">
+                                    <i class="fas fa-lock me-2"></i>Senha
+                                </label>
+                            </div>
+
+                            <!-- Botão de Login -->
+                            <div class="d-grid">
+                                <button id="login-button" class="btn btn-lg fw-semibold" style="background-color: #ffd700; color: #1a3a52;" type="submit" disabled>
+                                    <span id="button-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    <span id="button-text">Entrar</span>
+                                </button>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <a href="#" class="text-decoration-none small" style="color: #1a3a52;">Esqueci minha senha</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script de Login Customizado -->
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

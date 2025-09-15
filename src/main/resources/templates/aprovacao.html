@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inPulse - Aprovação de Ideia</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS customizado -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Estilos para o componente de workflow */
+        .workflow-stepper { display: flex; justify-content: space-between; position: relative; }
+        .workflow-step { text-align: center; flex-grow: 1; position: relative; }
+        .step-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #e9ecef; color: #6c757d; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; border: 2px solid #e9ecef; transition: all 0.3s ease; }
+        .step-label { font-size: 0.9rem; color: #6c757d; }
+        .workflow-step.active .step-icon { background-color: #1a3a52; color: #fff; border-color: #1a3a52; }
+        .workflow-step.active .step-label { font-weight: bold; color: #1a3a52; }
+        .workflow-step.completed .step-icon { background-color: #28a745; color: #fff; border-color: #28a745; }
+        .workflow-step.completed .step-label { color: #28a745; }
+        .workflow-line { position: absolute; top: 19px; left: 15%; right: 15%; height: 2px; background-color: #e9ecef; z-index: -1; }
+    </style>
+</head>
+
+<body style="background-color: #f8f9fa;">
+
+    <!-- Navbar Padrão do Sistema -->
+    <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #1a3a52;">
+        <div class="container-fluid">
+            <!-- Logo e Título da Página -->
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand fw-bold fs-3" href="#">
+                    <span style="color: #ffd700;">in</span><span class="text-white">Pulse</span>
+                </a>
+                <span class="navbar-text text-white-50 d-none d-lg-block border-start border-secondary ps-3 ms-3">
+                    Aprovação de Ideia
+                </span>
+            </div>
+
+            <!-- Botão Toggler para Mobile -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Conteúdo da Navbar -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Informações do Usuário (Mobile) -->
+                <div class="d-lg-none d-flex align-items-center justify-content-between text-white mt-3 mb-2 ps-2">
+                     <div class="d-flex align-items-center">
+                        <i class="fas fa-user-circle fa-2x me-2"></i>
+                        <span class="fw-bold">Lucas Bezerra</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-light btn-sm me-2">
+                        <i class="fas fa-sign-out-alt me-1"></i> Sair
+                    </a>
+                </div>
+                <hr class="d-lg-none text-white-50">
+
+                <!-- Links de Navegação Centralizados -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="./ideias.html">Dashboard de Ideias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="./logs.html">Logs de Auditoria</a>
+                    </li>
+                </ul>
+
+                <!-- Informações do Usuário (Desktop) -->
+                <div class="text-white d-none d-lg-flex align-items-center">
+                    <i class="fas fa-user-circle fa-2x me-2"></i>
+                    <div class="d-flex flex-column lh-1">
+                        <span class="small">Bem-vindo</span>
+                        <span class="fw-bold">Lucas Bezerra</span>
+                    </div>
+                    <a href="/" class="btn btn-outline-light btn-sm ms-3">
+                       <i class="fas fa-sign-out-alt me-1"></i> Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container p-4">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center" style="background-color: #1a3a52; color: white;">
+                <h4 class="mb-0">Detalhes da Ideia</h4>
+                <div id="idea-status-badge-container">
+                    <!-- Badge de status será inserido aqui -->
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Workflow Visual -->
+                <div class="mb-5">
+                    <h5 class="mb-4 text-center" style="color: #1a3a52;">Fluxo de Aprovação</h5>
+                    <div class="workflow-stepper">
+                        <div class="workflow-line"></div>
+                        <div class="workflow-step" data-step="nova">
+                            <div class="step-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div class="step-label">Nova</div>
+                        </div>
+                        <div class="workflow-step" data-step="em_analise">
+                            <div class="step-icon"><i class="fas fa-search"></i></div>
+                            <div class="step-label">Em Análise</div>
+                        </div>
+                        <div class="workflow-step" data-step="aprovada">
+                            <div class="step-icon"><i class="fas fa-check"></i></div>
+                            <div class="step-label">Aprovada</div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Detalhes da Ideia -->
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <h5 id="idea-title" class="mb-4" style="color: #1a3a52;"></h5>
+                        <h6><i class="fas fa-user-secret me-2 text-muted"></i>Autor</h6>
+                        <p class="mb-3 ps-4" id="idea-author"></p>
+                        <h6><i class="fas fa-file-alt me-2 text-muted"></i>Descrição</h6>
+                        <p class="mb-3 ps-4" id="idea-description"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-light p-3 rounded">
+                            <h5>Ações do Gestor</h5>
+                            <p class="small text-muted">Selecione uma ação para mover a ideia no fluxo de trabalho.</p>
+                            <div id="action-buttons-container" class="d-grid gap-2">
+                                <!-- Botões de ação serão inseridos aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title">Confirmar Ação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-text"></p>
+                    <div class="mb-3">
+                        <label for="feedback-comment" class="form-label">Justificativa / Comentário</label>
+                        <textarea class="form-control" id="feedback-comment" rows="3"></textarea>
+                        <div id="feedback-error" class="invalid-feedback">Este campo é obrigatório.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirm-action-btn">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificação -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto" id="toast-title"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toast-body"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script Customizado -->
+    <script src="/js/aprovacao.js"></script>
+    <script src="/js/user_info.js"></script>
+</body>
+
+</html>

@@ -61,4 +61,11 @@ public class IdeiasService {
         return ideiasRepository.save(ids);
     }
 
+     public Optional<Ideias> atualizarStatusIdeia(Long id, String novoStatus) {
+        return ideiasRepository.findById(id)
+            .map(ideia -> {
+                ideia.setStatus(novoStatus);
+                return ideiasRepository.save(ideia);
+            });
+    }
 }

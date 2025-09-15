@@ -21,6 +21,7 @@ public class Ideias {
     private String imagem;
     private LocalDate data;
     private BigInteger curtidas;
+    private String status; // Adicione esta linha
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
@@ -28,13 +29,14 @@ public class Ideias {
 
     @ManyToMany
     private List<Programas> programas;
+    
     @ManyToMany
     private List<Categorias> categorias;
 
     @OneToMany(mappedBy = "ideia",
             cascade =  CascadeType.ALL,
             orphanRemoval = true)
-    private List<Contribuicoes>contribuicoes;
+    private List<Contribuicoes> contribuicoes;
 
     public Long getIdeia_id() {
         return ideia_id;
@@ -90,6 +92,15 @@ public class Ideias {
 
     public void setCurtidas(BigInteger curtidas) {
         this.curtidas = curtidas;
+    }
+
+    // Adicione os métodos getter e setter para o campo 'status'
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Funcionarios getFuncionario() {

@@ -33,8 +33,8 @@ public class Funcionarios {
 
     @ManyToMany(mappedBy = "funcionarios")
     private List<Item> itens;
-    @ManyToMany(mappedBy = "funcionarios")
-    private List<Missao> missoes;
+    // @ManyToMany(mappedBy = "funcionarios")
+    // private List<Missao> missoes;
     @ManyToMany
     private List<Selos> selos;
     @OneToMany(mappedBy = "funcionarios",
@@ -42,10 +42,10 @@ public class Funcionarios {
     orphanRemoval = true)
     private List<Logs>logs;
 
-//    @OneToMany(mappedBy = "funcionario",
-//            cascade =  CascadeType.ALL,
-//            orphanRemoval = true)
-//    private List<Contribuicoes>contribuicoes;
+   @OneToMany(mappedBy = "funcionario",
+           cascade =  CascadeType.ALL,
+           orphanRemoval = true)
+   private List<Contribuicoes>contribuicoes;
 
     public Long getFuncionario_id() {
         return funcionario_id;
@@ -174,11 +174,5 @@ public class Funcionarios {
         this.itens = itens;
     }
 
-    public List<Missao> getMissoes() {
-        return missoes;
-    }
-
-    public void setMissoes(List<Missao> missoes) {
-        this.missoes = missoes;
-    }
+    
 }

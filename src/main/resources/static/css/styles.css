@@ -1,0 +1,11 @@
+.navbar-nav {
+    margin-right: 2rem;
+}
+
+/* Ajuste do espaçamento do container principal */
+@media (min-width: 1200px) {
+    .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}

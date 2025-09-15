@@ -71,4 +71,13 @@ public class FuncionariosService {
         return funcionariosRepository.findById(id)
                 .map(f -> funcionariosRepository.save(dto.toModel(f,itemRepository)));
     }
+    public Optional<Funcionarios> login(FuncionariosRequestLogin dto) {
+    Optional<Funcionarios> funcionario = funcionariosRepository.findByEmail(dto.getEmail());
+    
+    if (funcionario.isPresent() && funcionario.get().getSenha().equals(dto.getSenha())) {
+        return funcionario;
+    }
+    
+    return Optional.empty(); // Retorna vazio se o email ou a senha estiverem incorretos
+}
 }

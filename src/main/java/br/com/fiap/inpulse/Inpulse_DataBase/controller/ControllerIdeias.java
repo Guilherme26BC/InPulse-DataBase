@@ -5,20 +5,22 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpd
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.IdeiasService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("ideias")
+@RequestMapping("/api/ideias")
 public class ControllerIdeias {
 
+    private final IdeiasService ideiasService;
+
     @Autowired
-    private IdeiasService ideiasService;
+    public ControllerIdeias(IdeiasService ideiasService) {
+        this.ideiasService = ideiasService;
+    }
 
     @PostMapping
     public ResponseEntity<IdeiasResponseCreate> criarIdeias(@RequestBody IdeiasRequestCreate dto){
@@ -31,16 +33,18 @@ public class ControllerIdeias {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @GetMapping
     public ResponseEntity<List<IdeiasResponse>> buscarTodas(){
         return ResponseEntity.ok().body(ideiasService.buscarTodas().stream()
-                .map(i-> new IdeiasResponse().toDto(i)).collect(Collectors.toList()));
+                .map(i -> new IdeiasResponse().toDto(i)).collect(Collectors.toList()));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarIdeia(@PathVariable Long id){
         if(ideiasService.deletarIdeia(id)){
             return ResponseEntity.status(204).build();
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
