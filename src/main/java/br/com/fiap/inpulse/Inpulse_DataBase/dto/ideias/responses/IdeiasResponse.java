@@ -2,9 +2,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses.ContribuicoesResponseIdeias;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses.FuncionariosResponseIdeias;
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Contribuicoes;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 
 import java.math.BigInteger;
@@ -20,13 +18,13 @@ public class IdeiasResponse {
     private String imagem;
     private LocalDate data;
     private BigInteger curtidas;
+    private String status; // Novo campo
     private FuncionariosResponseIdeias funcionario_nome;
     private List<ProgramasResponseIF> programas_nome;
     private List<String> categoriasIcone;
     private List<ContribuicoesResponseIdeias> contribuicoes;
 
-
-    public IdeiasResponse toDto(Ideias ideias){
+    public IdeiasResponse toDto(Ideias ideias) {
         this.setIdeia_id(ideias.getIdeia_id());
         this.setNome(ideias.getNome());
         this.setProblema(ideias.getProblema());
@@ -34,20 +32,21 @@ public class IdeiasResponse {
         this.setImagem(ideias.getImagem());
         this.setData(ideias.getData());
         this.setCurtidas(ideias.getCurtidas());
+        this.setStatus(ideias.getStatus() != null ? ideias.getStatus() : "nova");
 
         this.setFuncionario_nome(new FuncionariosResponseIdeias().toDto(ideias.getFuncionario()));
 
         List<ProgramasResponseIF> nomesProgramas = ideias.getProgramas().stream()
-                .map(p-> new ProgramasResponseIF().toDto(p))
+                .map(p -> new ProgramasResponseIF().toDto(p))
                 .collect(Collectors.toList());
         this.setProgramas_nome(nomesProgramas);
 
         List<String> iconesCategorias = ideias.getCategorias().stream()
-                .map(c-> c.getIcone()).collect(Collectors.toList());
+                .map(c -> c.getIcone()).collect(Collectors.toList());
         this.setCategoriasIcone(iconesCategorias);
 
         List<ContribuicoesResponseIdeias> response = ideias.getContribuicoes().stream()
-                .map(c-> new ContribuicoesResponseIdeias().toDto(c)).collect(Collectors.toList());
+                .map(c -> new ContribuicoesResponseIdeias().toDto(c)).collect(Collectors.toList());
         this.setContribuicoes(response);
         return this;
     }
@@ -106,6 +105,14 @@ public class IdeiasResponse {
 
     public void setCurtidas(BigInteger curtidas) {
         this.curtidas = curtidas;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public FuncionariosResponseIdeias getFuncionario_nome() {

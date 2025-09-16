@@ -19,57 +19,56 @@
 <body style="background-color: #f8f9fa;">
 
     <!-- Navbar Padrão do Sistema -->
-   <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #1a3a52;">
-    <div class="container-fluid">
-        <div class="d-flex align-items-center">
-            <a class="navbar-brand fw-bold fs-3" href="#">
-                <span style="color: #ffd700;">in</span><span class="text-white">Pulse</span>
-            </a>
-            <span class="navbar-text text-white-50 d-none d-lg-block border-start border-secondary ps-3 ms-3">
-                Dashboard de Ideias
-            </span>
-        </div>
+    <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #1a3a52;">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <a class="navbar-brand fw-bold fs-3" href="#">
+                    <span style="color: #ffd700;">in</span><span class="text-white">Pulse</span>
+                </a>
+                <span class="navbar-text text-white-50 d-none d-lg-block border-start border-secondary ps-3 ms-3">
+                    Dashboard de Ideias
+                </span>
+            </div>
 
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="d-lg-none d-flex align-items-center justify-content-between text-white mt-3 mb-2 ps-2">
-                 <div class="d-flex align-items-center">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="d-lg-none d-flex align-items-center justify-content-between text-white mt-3 mb-2 ps-2">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-user-circle fa-2x me-2"></i>
+                        <span class="fw-bold" id="user-name-mobile"></span>
+                    </div>
+                    <a href="#" class="btn btn-outline-light btn-sm me-2">
+                        <i class="fas fa-sign-out-alt me-1"></i> Sair
+                    </a>
+                </div>
+                <hr class="d-lg-none text-white-50">
+
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/aprovacao.html">Aprovação de Ideia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/logs.html">Logs de Auditoria</a>
+                    </li>
+                </ul>
+
+                <div class="text-white d-none d-lg-flex align-items-center">
                     <i class="fas fa-user-circle fa-2x me-2"></i>
-                    <span class="fw-bold" id="user-name-mobile"></span>
+                    <div class="d-flex flex-column lh-1">
+                        <span class="small">Bem-vindo</span>
+                        <span class="fw-bold" id="user-name-desktop"></span>
+                    </div>
+                    <a href="/" class="btn btn-outline-light btn-sm ms-3">
+                        <i class="fas fa-sign-out-alt me-1"></i> Sair
+                    </a>
                 </div>
-                <a href="#" class="btn btn-outline-light btn-sm me-2">
-                    <i class="fas fa-sign-out-alt me-1"></i> Sair
-                </a>
-            </div>
-            <hr class="d-lg-none text-white-50">
-
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/aprovacao.html">Aprovação de Ideia</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/logs.html">Logs de Auditoria</a>
-                </li>
-            </ul>
-
-            <div class="text-white d-none d-lg-flex align-items-center">
-                <i class="fas fa-user-circle fa-2x me-2"></i>
-                <div class="d-flex flex-column lh-1">
-                    <span class="small">Bem-vindo</span>
-                    <span class="fw-bold" id="user-name-desktop"></span>
-                </div>
-                <a href="/" class="btn btn-outline-light btn-sm ms-3">
-                   <i class="fas fa-sign-out-alt me-1"></i> Sair
-                </a>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Conteúdo Principal -->
     <div class="container-fluid p-4">
@@ -142,8 +141,9 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1a3a52; color: #fff;">
-                    <h5 class="modal-title" id="detailModalLabel">Detalhes da Ideia ("One Page")</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="detailModalLabel">Detalhes da Ideia</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h6><i class="fas fa-lightbulb me-2 text-warning"></i>Título da Ideia</h6>
@@ -156,10 +156,31 @@
                     <p class="mb-3 ps-4" id="modal-description">...</p>
                     <h6><i class="fas fa-heart-broken me-2 text-danger"></i>A Dor</h6>
                     <p class="mb-3 ps-4" id="modal-pain">...</p>
-                    <h6><i class="fas fa-bullseye me-2 text-success"></i>O Objetivo</h6>
-                    <p class="mb-3 ps-4" id="modal-goal">...</p>
+                    <h6><i class="fas fa-tags me-2 text-primary"></i>Categorias</h6>
+                    <div class="mb-3 ps-4" id="modal-categorias">
+                    </div>
                     <h6><i class="fas fa-paperclip me-2 text-muted"></i>Anexos</h6>
                     <div class="ps-4 mb-4" id="modal-attachments"></div>
+                    <hr>
+                    <div class="accordion accordion-flush" id="commentsAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed fw-bold" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne"
+                                    style="background-color: #f0f2f5; color: #1a3a52;">
+                                    <i class="far fa-comments me-2"></i>Comentários (<span id="comment-count">0</span>)
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#commentsAccordion">
+                                <div class="accordion-body p-0">
+                                    <div id="modal-comments-list" class="list-group list-group-flush">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
                     <div id="manager-actions">
                         <h5 class="mt-4" style="color: #1a3a52;">Ação do Gestor</h5>
@@ -178,7 +199,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" id="save-changes-btn" class="btn" style="background-color: #ffd700; color: #1a3a52; font-weight: 600;">
+                    <button type="button" id="save-changes-btn" class="btn"
+                        style="background-color: #ffd700; color: #1a3a52; font-weight: 600;">
                         Salvar Alterações
                     </button>
                 </div>
@@ -191,7 +213,7 @@
     <!-- Script Customizado -->
     <script src="/js/user_info.js"></script>
     <script src="/js/ideias.js"></script>
-    
+
 </body>
 
 </html>

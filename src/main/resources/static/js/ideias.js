@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let allIdeas = [];
 
+
     async function fetchAllIdeas() {
         try {
             const response = await fetch('/api/ideias');
@@ -26,16 +27,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             allIdeas = await response.json();
-            
-            // Adiciona um status padrão 'nova' pois sua API ainda não o retorna.
-            allIdeas = allIdeas.map(idea => ({ ...idea, status: 'nova' }));
-            
+
+            // Adicione o status 'nova' como padrão para todas as ideias, se a API não o retornar
+            allIdeas = allIdeas.map(idea => ({ ...idea, status: idea.status || 'nova' }));
+
             applyFiltersAndSort();
         } catch (error) {
             console.error("Erro ao buscar ideias:", error);
             elements.tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Não foi possível carregar as ideias.</td></tr>`;
         }
     }
+
+
 
     function renderTable(ideas) {
         elements.tableBody.innerHTML = '';
@@ -46,24 +49,26 @@ document.addEventListener('DOMContentLoaded', function () {
         ideas.forEach(idea => {
             const status = statusConfig[idea.status];
             const formattedDate = new Date(idea.data).toLocaleDateString('pt-BR');
+            // A linha abaixo faz a verificação para evitar 'undefined undefined'
             const autor = idea.funcionario_nome ? `${idea.funcionario_nome.primeiro_nome} ${idea.funcionario_nome.ultimo_sobrenome}` : 'Anônimo';
 
             elements.tableBody.innerHTML += `
-                <tr>
-                    <td class="fw-bold">${idea.nome}</td>
-                    <td>${autor}</td>
-                    <td>${formattedDate}</td>
-                    <td class="text-center"><span class="badge ${status.bg}">${status.text}</span></td>
-                    <td class="text-center"><i class="fas fa-thumbs-up me-1"></i> ${idea.curtidas}</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
-                                data-bs-target="#detailModal" data-idea-id="${idea.ideia_id}">
-                            <i class="fas fa-search me-1"></i> Detalhes
-                        </button>
-                    </td>
-                </tr>`;
+            <tr>
+                <td class="fw-bold">${idea.nome}</td>
+                <td>${autor}</td>
+                <td>${formattedDate}</td>
+                <td class="text-center"><span class="badge ${status.bg}">${status.text}</span></td>
+                <td class="text-center"><i class="fas fa-thumbs-up me-1"></i> ${idea.curtidas}</td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
+                            data-bs-target="#detailModal" data-idea-id="${idea.ideia_id}">
+                        <i class="fas fa-search me-1"></i> Detalhes
+                    </button>
+                </td>
+            </tr>`;
         });
     }
+
 
     function applyFiltersAndSort() {
         let filteredIdeas = [...allIdeas];
@@ -95,22 +100,67 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             const idea = await response.json();
 
+            // Garante que o status tenha um valor padrão se for nulo
+            const ideaStatus = idea.status || 'nova';
+
+            // Atualiza os detalhes da ideia no modal
             document.getElementById('modal-title').textContent = idea.nome;
-            const autor = idea.funcionario_nome ? `${idea.funcionario_nome.primeiro_nome} ${idea.funcionario_nome.ultimo_sobrenome} (ID: ${idea.ideia_id})` : 'Anônimo';
+
+            // Corrige a exibição do nome do autor
+            const autor = idea.funcionario_nome
+                ? `${idea.funcionario_nome.primeiro_nome} ${idea.funcionario_nome.ultimo_sobrenome}`
+                : 'Anônimo';
             document.getElementById('modal-author').textContent = autor;
+
             document.getElementById('modal-description').textContent = idea.descricao;
             document.getElementById('modal-pain').textContent = idea.problema;
-            document.getElementById('modal-goal').textContent = 'O objetivo não está disponível na API.'; 
 
+            // Seção de Categorias
+            const categoriasContainer = document.getElementById('modal-categorias');
+            categoriasContainer.innerHTML = ''; // Limpa a seção
+            if (idea.categoriasIcone && idea.categoriasIcone.length > 0) {
+                idea.categoriasIcone.forEach(categoria => {
+                    categoriasContainer.innerHTML += `<span class="badge bg-secondary me-1">${categoria}</span>`;
+                });
+            } else {
+                categoriasContainer.innerHTML = '<p class="text-muted">Nenhuma categoria.</p>';
+            }
+
+            // Atualiza o status
             const statusBadge = document.getElementById('modal-status-badge');
-            const status = statusConfig[idea.status] || statusConfig['nova'];
+            const status = statusConfig[ideaStatus];
             statusBadge.className = `badge ${status.bg}`;
             statusBadge.textContent = status.text;
 
+            // Seção de anexos
             const attachmentsContainer = document.getElementById('modal-attachments');
             attachmentsContainer.innerHTML = '<p class="text-muted">Nenhum anexo disponível.</p>';
-            
-            updateStatusOptions(idea);
+
+            // Adiciona a lógica da seção de comentários
+            const commentsList = document.getElementById('modal-comments-list');
+            const commentCountElement = document.getElementById('comment-count');
+
+            commentsList.innerHTML = '';
+            if (idea.contribuicoes && idea.contribuicoes.length > 0) {
+                idea.contribuicoes.forEach(comment => {
+                    const commentHtml = `
+                    <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 fw-bold">${comment.nomeAutor || 'Anônimo'}</h6>
+                        </div>
+                        <p class="mb-1">${comment.coment}</p>
+                    </div>
+                `;
+                    commentsList.innerHTML += commentHtml;
+                });
+                commentCountElement.textContent = idea.contribuicoes.length;
+            } else {
+                commentsList.innerHTML = `<div class="list-group-item text-muted text-center">Nenhum comentário.</div>`;
+                commentCountElement.textContent = 0;
+            }
+
+            // Atualiza as opções de status e feedback
+            updateStatusOptions({ status: ideaStatus });
 
         } catch (error) {
             console.error("Erro ao carregar detalhes da ideia:", error);
@@ -144,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
             managerActions.style.display = 'none';
         }
     }
-    
+
     elements.detailModal.addEventListener('show.bs.modal', function (event) {
         const ideaId = parseInt(event.relatedTarget.getAttribute('data-idea-id'));
         if (ideaId) {
@@ -153,37 +203,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    elements.saveChangesBtn.addEventListener('click', async function() {
-        const ideaId = parseInt(this.dataset.ideaId);
-        const newStatus = document.getElementById('changeStatus').value;
-        const feedback = document.getElementById('feedbackComment').value;
-        
-        try {
-            const response = await fetch(`/api/ideias/${ideaId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ status: newStatus })
-            });
 
-            if (!response.ok) {
-                throw new Error(`Erro ao atualizar ideia: ${response.status}`);
+        elements.saveChangesBtn.addEventListener('click', async function () {
+            const ideaId = parseInt(this.dataset.ideaId);
+            const newStatus = document.getElementById('changeStatus').value;
+
+            try {
+                const response = await fetch(`/api/ideias/${ideaId}/status`, { // Endpoint corrigido
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus }) // DTO corrigido
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro ao atualizar ideia: ${response.status}`);
+                }
+
+                await fetchAllIdeas();
+
+                const modalInstance = bootstrap.Modal.getInstance(elements.detailModal);
+                modalInstance.hide();
+            } catch (error) {
+                console.error("Erro ao salvar alterações:", error);
+                alert("Não foi possível salvar as alterações.");
             }
+        });
 
-            await fetchAllIdeas();
+        [elements.filterStatus, elements.filterPrograma, elements.startDate, elements.endDate, elements.sortOrder].forEach(el => {
+            el.addEventListener('change', applyFiltersAndSort);
+        });
 
-            const modalInstance = bootstrap.Modal.getInstance(elements.detailModal);
-            modalInstance.hide();
-        } catch (error) {
-            console.error("Erro ao salvar alterações:", error);
-            alert("Não foi possível salvar as alterações.");
-        }
+        fetchAllIdeas();
     });
-
-    [elements.filterStatus, elements.filterPrograma, elements.startDate, elements.endDate, elements.sortOrder].forEach(el => {
-        el.addEventListener('change', applyFiltersAndSort);
-    });
-
-    fetchAllIdeas();
-});
