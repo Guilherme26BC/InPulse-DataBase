@@ -6,8 +6,12 @@ import org.hibernate.annotations.Cascade;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "ideias", indexes = {
+        @Index(name = "idx_funcionario_id", columnList = "funcionario_id")
+})
 public class Ideias {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,14 +33,12 @@ public class Ideias {
 
     @ManyToMany
     private List<Programas> programas;
-    
-    @ManyToMany
-    private List<Categorias> categorias;
 
-    @OneToMany(mappedBy = "ideia",
-            cascade =  CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Contribuicoes> contribuicoes;
+    @ManyToMany
+    private Set<Categorias> categorias; // Altere List para Set
+
+    @OneToMany(mappedBy = "ideia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Contribuicoes> contribuicoes;
 
     public Long getIdeia_id() {
         return ideia_id;
@@ -119,19 +121,19 @@ public class Ideias {
         this.programas = programas;
     }
 
-    public List<Categorias> getCategorias() {
+    public Set<Categorias> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<Categorias> categorias) {
+    public void setCategorias(Set<Categorias> categorias) {
         this.categorias = categorias;
     }
 
-    public List<Contribuicoes> getContribuicoes() {
+    public Set<Contribuicoes> getContribuicoes() {
         return contribuicoes;
     }
 
-    public void setContribuicoes(List<Contribuicoes> contribuicoes) {
+    public void setContribuicoes(Set<Contribuicoes> contribuicoes) {
         this.contribuicoes = contribuicoes;
     }
 }

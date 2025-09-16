@@ -36,8 +36,8 @@ public class IdeiasService {
         return ideiasRepository.findById(id);
     }
 
-    public List<Ideias> buscarTodas() {
-        return ideiasRepository.findAll();
+    public List<Ideias> buscarTodas(){
+        return ideiasRepository.findAllWithDetails();
     }
 
     public boolean deletarIdeia(Long id) {

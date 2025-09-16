@@ -7,6 +7,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FuncionariosRequestUpdate {
@@ -19,7 +20,7 @@ public class FuncionariosRequestUpdate {
         BigInteger pontosAux = funcionarios.getPontos();
         BigDecimal moedasAux = funcionarios.getMoedas();
         String tier = funcionarios.getTier();
-        List<Selos> selosList =funcionarios.getSelos();
+        Set<Selos> selosList =funcionarios.getSelos();
 
         if(!this.getSelos_id().isEmpty()) {
           selosList.addAll(this.getSelos_id().stream().map(s -> {

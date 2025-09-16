@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("funcionarios")
+@RequestMapping("/api/funcionarios")
 public class ControllerFuncionarios {
     @Autowired
     private FuncionariosService funcionariosService;

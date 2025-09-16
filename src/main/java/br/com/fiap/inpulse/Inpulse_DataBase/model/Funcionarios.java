@@ -1,10 +1,10 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set; // Importe a classe Set
 
 @Entity
 public class Funcionarios {
@@ -27,25 +27,26 @@ public class Funcionarios {
     @OneToMany(mappedBy = "funcionario",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<Ideias> ideias;
-    @ManyToMany(mappedBy = "funcionarios")
-    private List<Programas> programas;
+    private Set<Ideias> ideias; // Já corrigido
 
     @ManyToMany(mappedBy = "funcionarios")
-    private List<Item> itens;
-    // @ManyToMany(mappedBy = "funcionarios")
-    // private List<Missao> missoes;
+    private Set<Programas> programas; // Altere de List para Set
+
+    @ManyToMany(mappedBy = "funcionarios")
+    private Set<Item> itens; // Já corrigido
+    
     @ManyToMany
-    private List<Selos> selos;
+    private Set<Selos> selos; // Altere de List para Set
+    
     @OneToMany(mappedBy = "funcionarios",
     cascade =  CascadeType.ALL,
     orphanRemoval = true)
     private List<Logs>logs;
 
-   @OneToMany(mappedBy = "funcionario",
+    @OneToMany(mappedBy = "funcionario",
            cascade =  CascadeType.ALL,
            orphanRemoval = true)
-   private List<Contribuicoes>contribuicoes;
+    private List<Contribuicoes>contribuicoes;
 
     public Long getFuncionario_id() {
         return funcionario_id;
@@ -127,27 +128,27 @@ public class Funcionarios {
         this.imagem_funcionario = imagem_funcionario;
     }
 
-    public List<Ideias> getIdeias() {
+    public Set<Ideias> getIdeias() {
         return ideias;
     }
 
-    public void setIdeias(List<Ideias> ideias) {
+    public void setIdeias(Set<Ideias> ideias) {
         this.ideias = ideias;
     }
 
-    public List<Programas> getProgramas() {
+    public Set<Programas> getProgramas() { // Getter alterado
         return programas;
     }
 
-    public void setProgramas(List<Programas> programas) {
+    public void setProgramas(Set<Programas> programas) { // Setter alterado
         this.programas = programas;
     }
 
-    public List<Selos> getSelos() {
+    public Set<Selos> getSelos() { // Getter alterado
         return selos;
     }
 
-    public void setSelos(List<Selos> selos) {
+    public void setSelos(Set<Selos> selos) { // Setter alterado
         this.selos = selos;
     }
 
@@ -166,13 +167,11 @@ public class Funcionarios {
     public void setContribuicoes(List<Contribuicoes> contribuicoes) {
         this.contribuicoes = contribuicoes;
     }
-    public List<Item> getItens() {
+    public Set<Item> getItens() { // Getter alterado
         return itens;
     }
 
-    public void setItens(List<Item> itens) {
+    public void setItens(Set<Item> itens) { // Setter alterado
         this.itens = itens;
     }
-
-    
 }

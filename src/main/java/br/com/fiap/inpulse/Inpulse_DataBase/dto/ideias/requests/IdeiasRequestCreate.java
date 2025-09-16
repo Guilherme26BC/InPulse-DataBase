@@ -8,7 +8,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set; // Importe o Set
 import java.util.stream.Collectors;
 
 public class IdeiasRequestCreate {
@@ -17,7 +17,8 @@ public class IdeiasRequestCreate {
     private String descricao;
     private String imagem;
     private Long funcionario_id;
-    private List<Long> categorias_id;
+    private Set<Long> categorias_id;
+    
     public Ideias toModel(FuncionariosRepository funcionariosRepository, CategoriasRepository categoriasRepository){
         Ideias ideias = new Ideias();
         ideias.setNome(this.getNome());
@@ -26,19 +27,23 @@ public class IdeiasRequestCreate {
         ideias.setImagem(this.getImagem());
         ideias.setData(LocalDate.now());
         ideias.setCurtidas(new BigInteger("0"));
+        
         Funcionarios funcionarios = funcionariosRepository.findById(this.getFuncionario_id())
-                        .orElseThrow(() ->
-                                new RuntimeException("Funcionario inexistente: " + this.getFuncionario_id()));
+                .orElseThrow(() ->
+                        new RuntimeException("Funcionario inexistente: " + this.getFuncionario_id()));
         ideias.setFuncionario(funcionarios);
-        List<Categorias> categorias = categorias_id.stream().map(c->{
+        
+        // CORREÇÃO: Altere o tipo de coleção de List para Set
+        Set<Categorias> categorias = categorias_id.stream().map(c->{
             Categorias cat = categoriasRepository.findById(c)
                     .orElseThrow(()-> new RuntimeException("Categoria não encontrada" + this.getCategorias_id()));
             return cat;
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toSet()); // CORREÇÃO: Use `Collectors.toSet()`
         ideias.setCategorias(categorias);
 
         return ideias;
     }
+    
     public String getNome() {
         return nome;
     }
@@ -79,11 +84,11 @@ public class IdeiasRequestCreate {
         this.funcionario_id = funcionario_id;
     }
 
-    public List<Long> getCategorias_id() {
+    public Set<Long> getCategorias_id() {
         return categorias_id;
     }
 
-    public void setCategorias_id(List<Long> categorias_id) {
+    public void setCategorias_id(Set<Long> categorias_id) {
         this.categorias_id = categorias_id;
     }
 }

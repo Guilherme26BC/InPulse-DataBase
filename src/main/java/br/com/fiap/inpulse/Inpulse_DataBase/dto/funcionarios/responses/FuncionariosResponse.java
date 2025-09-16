@@ -10,6 +10,7 @@ import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FuncionariosResponse {
@@ -24,8 +25,8 @@ public class FuncionariosResponse {
     private boolean modo_anonimo;
     private String imagem_funcionario;
     private List<IdeiasResponseFuncionarios> ideias;
-    private List<ProgramasResponseIF> programas;
-    private List<SelosResponseFuncionarios> selos;
+    private Set<ProgramasResponseIF> programas;
+    private Set<SelosResponseFuncionarios> selos;
     private List<ItemResponseFuncionario> itens;
     private List<String> logs;
 
@@ -46,14 +47,14 @@ public class FuncionariosResponse {
                 .collect(Collectors.toList());
        this.setIdeias(ideias);
 
-        List<ProgramasResponseIF> nomesProgramas = funcionarios.getProgramas().stream()
+        Set<ProgramasResponseIF> nomesProgramas = funcionarios.getProgramas().stream()
                 .map(p-> new ProgramasResponseIF().toDto(p))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         this.setProgramas(nomesProgramas);
 
-        List<SelosResponseFuncionarios> nomesSelos = funcionarios.getSelos().stream()
+        Set<SelosResponseFuncionarios> nomesSelos = funcionarios.getSelos().stream()
                 .map(p-> new SelosResponseFuncionarios().toDto(p))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         this.setSelos(nomesSelos);
 
         List<ItemResponseFuncionario> itensR = funcionarios.getItens().stream()
@@ -147,19 +148,19 @@ public class FuncionariosResponse {
         this.ideias = ideias;
     }
 
-    public List<ProgramasResponseIF> getProgramas() {
+    public Set<ProgramasResponseIF> getProgramas() {
         return programas;
     }
 
-    public void setProgramas(List<ProgramasResponseIF> programas) {
+    public void setProgramas(Set<ProgramasResponseIF> programas) {
         this.programas = programas;
     }
 
-    public List<SelosResponseFuncionarios> getSelos() {
+    public Set<SelosResponseFuncionarios> getSelos() {
         return selos;
     }
 
-    public void setSelos(List<SelosResponseFuncionarios> selos) {
+    public void setSelos(Set<SelosResponseFuncionarios> selos) {
         this.selos = selos;
     }
 

@@ -2,6 +2,8 @@ package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class PageController {
@@ -15,4 +17,10 @@ public class PageController {
     public String loginPage() {
         return "index"; // O Spring Boot procurará por 'index.html'
     }
+
+    @GetMapping("/usuarios")
+    public String funcionariosPage() {
+        return "funcionarios";
+    }
+    
 }
