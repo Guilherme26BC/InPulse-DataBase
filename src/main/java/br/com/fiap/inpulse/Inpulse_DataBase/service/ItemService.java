@@ -2,7 +2,9 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.requests.ItensRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.requests.ItensRequestUpdate;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Item;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class ItemService {
     @Autowired
     ItemRepository itemRepository;
+    @Autowired
+    private FuncionariosRepository funcionariosRepository;
 
     public Item createItem(ItensRequestCreate dto){
         return itemRepository.save(dto.toModel());
@@ -34,5 +38,11 @@ public class ItemService {
         }else{
             return false;
         }
+    }
+    public Item atualizarItemFuncionario(Long idItem, Long idfuncionario){
+        Funcionarios funcionario = funcionariosRepository.findById(idfuncionario).orElseThrow(() -> new RuntimeException());
+        Item it = itemRepository.findById(idItem).orElseThrow(() -> new RuntimeException());
+        it.getFuncionarios().add(funcionario);
+        return itemRepository.save(it);
     }
 }

@@ -24,6 +24,8 @@ public class FuncionariosService {
     private ProgramasRepository programasRepository;
     @Autowired
     private ItemRepository itemRepository;
+@Autowired
+private ItemService itemService;
 
     public Funcionarios criarFuncionario(FuncionariosRequestCreate dto){
         return funcionariosRepository.save(dto.toModel());
@@ -69,7 +71,7 @@ public class FuncionariosService {
     }
     public Optional<Funcionarios> atualizarItens(Long id, FuncionariosRequestUpdateItem dto){
         return funcionariosRepository.findById(id)
-                .map(f -> funcionariosRepository.save(dto.toModel(f,itemRepository)));
+                .map(f -> funcionariosRepository.save(dto.toModel(f,itemRepository, itemService)));
     }
     public Optional<Funcionarios> login(FuncionariosRequestLogin dto) {
     Optional<Funcionarios> funcionario = funcionariosRepository.findByEmail(dto.getEmail());

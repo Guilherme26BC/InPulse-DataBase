@@ -20,42 +20,52 @@ public class FuncionariosRequestUpdate {
         BigInteger pontosAux = funcionarios.getPontos();
         BigDecimal moedasAux = funcionarios.getMoedas();
         String tier = funcionarios.getTier();
-        Set<Selos> selosList =funcionarios.getSelos();
+        Set<Selos> selosList = funcionarios.getSelos();
 
+        // Adiciona novos selos, se houver
         if(!this.getSelos_id().isEmpty()) {
-          selosList.addAll(this.getSelos_id().stream().map(s -> {
-                Selos selosaux = selosRepository.findById(s)
-                        .orElseThrow(() -> new RuntimeException("Sello não encontrado" + s));
-                return selosaux;
+            selosList.addAll(this.getSelos_id().stream().map(s -> {
+                Selos selo = selosRepository.findById(s)
+                        .orElseThrow(() -> new RuntimeException("Selo não encontrado: " + s));
+                return selo;
             }).collect(Collectors.toList()));
         }
+
+        // Atualiza os pontos e moedas com base nos selos
         for(Selos selo : selosList){
-            pontosAux= pontosAux.add(selo.getPontos());
-            moedasAux= moedasAux.add(selo.getMoedas());
+            pontosAux = pontosAux.add(selo.getPontos());
+            moedasAux = moedasAux.add(selo.getMoedas());
         }
-        if(this.getPontos().compareTo(new BigInteger("-1"))<=0){
-           pontosAux= pontosAux.add(this.getPontos());
+
+        // Atualiza os pontos, caso a entrada seja diferente de -1
+        if(this.getPontos() != null && this.getPontos().compareTo(BigInteger.valueOf(-1)) > 0){
+            pontosAux = pontosAux.add(this.getPontos());
         }
-        if(this.getMoedas().compareTo(new BigDecimal(-1))<=0){
-           moedasAux= moedas.add(this.getMoedas());
+
+        // Atualiza as moedas, caso a entrada seja diferente de -1
+        if(this.getMoedas() != null && this.getMoedas().compareTo(new BigDecimal(-1)) > 0){
+            moedasAux = moedasAux.add(this.getMoedas());
         }
+
+        // Define os novos valores de pontos e moedas no funcionário
         funcionarios.setPontos(pontosAux);
         funcionarios.setMoedas(moedasAux);
 
-        if(funcionarios.getPontos().compareTo(new BigInteger("5")) >= 0){
-           tier = "Prata";
-        }
-
-        if(funcionarios.getPontos().compareTo(new BigInteger("10")) >= 0){
+        // Atualiza o tier com base nos pontos
+        if(funcionarios.getPontos().compareTo(BigInteger.valueOf(10)) >= 0){
             tier = "Ouro";
+        } else if(funcionarios.getPontos().compareTo(BigInteger.valueOf(5)) >= 0){
+            tier = "Prata";
         }
 
         funcionarios.setTier(tier);
         funcionarios.setModo_anonimo(isModo_anonimo());
         funcionarios.setSelos(selosList);
+
         return funcionarios;
     }
 
+    // Getters e Setters
     public BigInteger getPontos() {
         return pontos;
     }

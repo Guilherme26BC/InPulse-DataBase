@@ -5,13 +5,14 @@ import br.com.fiap.inpulse.Inpulse_DataBase.model.Item;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ItemResponse {
     private Long id;
     private String nome;
     private String descricao;
     private BigDecimal preco;
-    private List<Funcionarios> funcionarios;
+    private List<Long> funcionarios;
     private String tier;
 
     public ItemResponse toDto(Item item){
@@ -19,8 +20,12 @@ public class ItemResponse {
         this.setNome(item.getNome());
         this.setDescricao(item.getDescricao());
         this.setPreco(item.getPreco());
-        this.setFuncionarios(item.getFuncionarios());
+        List<Long> idsFuncionarios = item.getFuncionarios().stream()
+                .map(f-> f.getFuncionario_id())
+                .collect(Collectors.toList());
+        this.setFuncionarios(idsFuncionarios);
         this.setTier(item.getTier());
+
         return this;
     }
     public Long getId() {
@@ -55,11 +60,11 @@ public class ItemResponse {
         this.preco = preco;
     }
 
-    public List<Funcionarios> getFuncionarios() {
+    public List<Long> getFuncionarios() {
         return funcionarios;
     }
 
-    public void setFuncionarios(List<Funcionarios> funcionarios) {
+    public void setFuncionarios(List<Long> funcionarios) {
         this.funcionarios = funcionarios;
     }
 
