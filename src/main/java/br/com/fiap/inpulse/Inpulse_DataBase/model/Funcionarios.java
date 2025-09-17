@@ -34,7 +34,8 @@ public class Funcionarios {
 
     @ManyToMany(mappedBy = "funcionarios")
     private Set<Item> itens; // Já corrigido
-    
+    @ManyToMany(mappedBy = "funcionarios")
+    private Set<Missoes> missoes;
     @ManyToMany
     private Set<Selos> selos; // Altere de List para Set
     
@@ -173,5 +174,13 @@ public class Funcionarios {
 
     public void setItens(Set<Item> itens) { // Setter alterado
         this.itens = itens;
+    }
+
+    public Set<Missoes> getMissoes() {
+        return missoes;
+    }
+
+    public void setMissoes(Set<Missoes> missoes) {
+        this.missoes = missoes;
     }
 }
