@@ -27,7 +27,7 @@ public class ControllerMissoes {
         return ResponseEntity.ok().body(missoesService.buscarTodas().stream().map(
                 m-> new MissoesResponse().toDto(m)).collect(Collectors.toList()));
     }
-    @GetMapping('/{id}')
+    @GetMapping("/{id}")
     public ResponseEntity<MissoesResponse> buscarPorId(@PathVariable Long id){
         return missoesService.buscarporId(id).map(m-> new MissoesResponse().toDto(m))
                 .map(ResponseEntity::ok)
