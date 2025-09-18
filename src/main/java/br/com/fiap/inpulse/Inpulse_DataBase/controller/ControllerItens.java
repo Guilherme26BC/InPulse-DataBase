@@ -3,6 +3,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.controller;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.requests.ItensRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.requests.ItensRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponse;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class ControllerItens {
     private ItemService itemService;
 
     @PostMapping
-    public ResponseEntity<ItemResponse> criarItem(@RequestBody ItensRequestCreate dto){
-        return ResponseEntity.ok().body(new ItemResponse().toDto(itemService.createItem(dto)));
+    public ResponseEntity<ItemResponseCreate> criarItem(@RequestBody ItensRequestCreate dto){
+        return ResponseEntity.ok().body(new ItemResponseCreate().toDto(itemService.createItem(dto)));
     }
     @GetMapping
     public ResponseEntity<List<ItemResponse>> buscarTodas(){

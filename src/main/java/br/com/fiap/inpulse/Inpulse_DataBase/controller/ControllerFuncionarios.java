@@ -80,11 +80,18 @@ public class ControllerFuncionarios {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    @PutMapping("missoes/{id}")
+    public ResponseEntity<FuncionariosResponse> adicionarMissao(@PathVariable Long id, FuncionariosRequestUpdateMissoes dto){
+        return funcionariosService.atualizarMissao(id, dto)
+                .map(f-> new FuncionariosResponse().toModel(f))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
     @PostMapping("/login")
-public ResponseEntity<FuncionariosResponse> login(@RequestBody FuncionariosRequestLogin dto) {
-    return funcionariosService.login(dto)
-            .map(f -> new FuncionariosResponse().toModel(f))
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.status(401).build());
-}
+    public ResponseEntity<FuncionariosResponse> login(@RequestBody FuncionariosRequestLogin dto) {
+        return funcionariosService.login(dto)
+                .map(f -> new FuncionariosResponse().toModel(f))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(401).build());
+    }
 }

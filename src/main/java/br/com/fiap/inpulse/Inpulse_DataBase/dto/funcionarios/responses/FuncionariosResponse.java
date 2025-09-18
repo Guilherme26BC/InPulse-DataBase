@@ -3,6 +3,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.responses;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponseFuncionario;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.missoes.responses.MissoesResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.selos.responses.SelosResponseFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.*;
@@ -26,6 +27,7 @@ public class FuncionariosResponse {
     private String imagem_funcionario;
     private List<IdeiasResponseFuncionarios> ideias;
     private Set<ProgramasResponseIF> programas;
+    private List<MissoesResponseFuncionarios> missoes;
     private Set<SelosResponseFuncionarios> selos;
     private List<ItemResponseFuncionario> itens;
     private List<String> logs;
@@ -56,7 +58,9 @@ public class FuncionariosResponse {
                 .map(p-> new SelosResponseFuncionarios().toDto(p))
                 .collect(Collectors.toSet());
         this.setSelos(nomesSelos);
-
+        List< MissoesResponseFuncionarios> missoesR = funcionarios.getMissoes().stream()
+                .map(p-> new MissoesResponseFuncionarios().toDto(p)).collect(Collectors.toList());
+        this.setMissoes(missoesR);
         List<ItemResponseFuncionario> itensR = funcionarios.getItens().stream()
                 .map(i-> new ItemResponseFuncionario().toDto(i))
                 .collect(Collectors.toList());
@@ -186,5 +190,13 @@ public class FuncionariosResponse {
 
     public void setItens(List<ItemResponseFuncionario> itens) {
         this.itens = itens;
+    }
+
+    public List<MissoesResponseFuncionarios> getMissoes() {
+        return missoes;
+    }
+
+    public void setMissoes(List<MissoesResponseFuncionarios> missoes) {
+        this.missoes = missoes;
     }
 }

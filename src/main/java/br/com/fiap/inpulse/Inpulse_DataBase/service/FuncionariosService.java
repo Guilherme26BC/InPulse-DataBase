@@ -3,10 +3,7 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.*;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
-import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
-import br.com.fiap.inpulse.Inpulse_DataBase.repository.ItemRepository;
-import br.com.fiap.inpulse.Inpulse_DataBase.repository.ProgramasRepository;
-import br.com.fiap.inpulse.Inpulse_DataBase.repository.SelosRepository;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +21,9 @@ public class FuncionariosService {
     private ProgramasRepository programasRepository;
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private MissoesRepository missoesRepository;
+    @Autowired MissoesService missoesService;
 @Autowired
 private ItemService itemService;
 
@@ -69,6 +69,10 @@ private ItemService itemService;
         fun.getProgramas().add(programa);
         return funcionariosRepository.save(fun);
     }
+    public Optional<Funcionarios> atualizarMissao(Long id, FuncionariosRequestUpdateMissoes dto){
+        return funcionariosRepository.findById(id)
+                .map(f -> funcionariosRepository.save(dto.toModel(f, missoesRepository, missoesService)));
+    }
     public Optional<Funcionarios> atualizarItens(Long id, FuncionariosRequestUpdateItem dto){
         return funcionariosRepository.findById(id)
                 .map(f -> funcionariosRepository.save(dto.toModel(f,itemRepository, itemService)));
@@ -82,4 +86,5 @@ private ItemService itemService;
     
     return Optional.empty(); // Retorna vazio se o email ou a senha estiverem incorretos
 }
+
 }
