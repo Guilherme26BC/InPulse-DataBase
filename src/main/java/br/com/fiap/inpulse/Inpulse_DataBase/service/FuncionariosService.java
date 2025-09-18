@@ -23,7 +23,8 @@ public class FuncionariosService {
     private ItemRepository itemRepository;
     @Autowired
     private MissoesRepository missoesRepository;
-    @Autowired MissoesService missoesService;
+    @Autowired
+    private MissoesService missoesService;
 @Autowired
 private ItemService itemService;
 

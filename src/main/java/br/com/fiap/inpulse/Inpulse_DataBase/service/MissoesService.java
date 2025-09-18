@@ -18,6 +18,7 @@ public class MissoesService {
     private MissoesRepository missoesRepository;
     @Autowired
     private FuncionariosRepository funcionariosRepository;
+
     public Missoes criarMissao(MissoesRequestCreate dto){
         return missoesRepository.save(dto.toModel());
     }
