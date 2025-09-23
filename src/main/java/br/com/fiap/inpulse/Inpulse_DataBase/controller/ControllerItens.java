@@ -7,7 +7,6 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses.ItemResponseCrea
 import br.com.fiap.inpulse.Inpulse_DataBase.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -3,8 +3,6 @@ package br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Item;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemResponseCreate {
     private Long id;

@@ -1,6 +1,5 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.model;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.funcionarios.requests.FuncionariosRequestUpdate;
 import jakarta.persistence.*;
 
 @Entity

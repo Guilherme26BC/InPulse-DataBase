@@ -7,7 +7,6 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.missoes.responses.MissoesRespons
 import br.com.fiap.inpulse.Inpulse_DataBase.service.MissoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

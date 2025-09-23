@@ -183,4 +183,8 @@ public class Funcionarios {
     public void setMissoes(Set<Missoes> missoes) {
         this.missoes = missoes;
     }
+
+      public String getNome() {
+        return this.primeiro_nome + " " + this.ultimo_sobrenome;
+    }
 }

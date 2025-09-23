@@ -1,6 +1,5 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses.ContribuicoesResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses.ContribuicoesResponseIdeias;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseIF;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;

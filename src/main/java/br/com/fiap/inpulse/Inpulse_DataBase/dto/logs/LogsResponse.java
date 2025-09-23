@@ -1,6 +1,5 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.logs;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Logs;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.LogsStatus;
 

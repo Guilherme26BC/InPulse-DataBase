@@ -20,19 +20,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderTable(programas) {
-        elements.tableBody.innerHTML = '';
         if (!programas || programas.length === 0) {
             elements.tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-muted">Nenhum programa encontrado.</td></tr>`;
             return;
         }
 
+        let rows = '';
         programas.forEach(p => {
             const dataInicio = p.dataInicio ? p.dataInicio : 'N/A';
             const dataFim = p.dataFim ? p.dataFim : 'N/A';
-            const participantes = p.funcionarios_nome ? p.funcionarios_nome.length : 0;
-            const ideias = p.ideias_nome ? p.ideias_nome.length : 0;
+            const participantes = p.funcionarios_nome ? new Set(p.funcionarios_nome).size : 0;
+            const ideias = p.ideias_nome ? new Set(p.ideias_nome).size : 0;
 
-            elements.tableBody.innerHTML += `
+            rows += `
                 <tr>
                     <td class="fw-bold">${p.programa_id}</td>
                     <td class="fw-bold">${p.nome_programa}</td>
@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </td>
                 </tr>`;
         });
+        elements.tableBody.innerHTML = rows;
     }
     
     elements.detailsModal.addEventListener('show.bs.modal', async function (event) {

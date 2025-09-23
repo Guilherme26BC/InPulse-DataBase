@@ -1,7 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -135,5 +134,10 @@ public class Ideias {
 
     public void setContribuicoes(Set<Contribuicoes> contribuicoes) {
         this.contribuicoes = contribuicoes;
+    }
+
+    public Long getId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getId'");
     }
 }

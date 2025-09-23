@@ -1,9 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.contribuicoes.responses;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Contribuicoes;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
-import jakarta.persistence.*;
 
 public class ContribuicoesResponse {
     private Long id;

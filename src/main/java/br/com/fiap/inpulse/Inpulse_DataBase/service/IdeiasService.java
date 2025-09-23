@@ -3,7 +3,6 @@ package br.com.fiap.inpulse.Inpulse_DataBase.service;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpdateStatus;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.CategoriasRepository;

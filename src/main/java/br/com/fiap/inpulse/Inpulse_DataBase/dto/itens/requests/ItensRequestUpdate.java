@@ -3,7 +3,6 @@ package br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.requests;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Item;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class ItensRequestUpdate {
     private BigDecimal preco;

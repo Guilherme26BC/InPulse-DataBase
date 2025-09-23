@@ -1,12 +1,10 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
-import br.com.fiap.inpulse.Inpulse_DataBase.service.FuncionariosService;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
 
 public class ProgramasRequestUpdateFuncionarios {
     private Long funcionarios_id;
@@ -14,8 +12,12 @@ public class ProgramasRequestUpdateFuncionarios {
     public Programas toModel(Programas programas, FuncionariosRepository funcionariosRepository){
         Funcionarios funAux = funcionariosRepository.findById(this.getFuncionarios_id()).orElseThrow(()->
                 new RuntimeException("Funcionario inexistente: " + this.getFuncionarios_id()));
-            programas.getFuncionarios().add(funAux);
-            return programas;
+
+        if (programas.getFuncionarios().contains(funAux)) {
+            throw new RuntimeException("Funcionario ja cadastrado no programa: " + this.getFuncionarios_id());
+        }
+        return programas;
+
     }
     public Long getFuncionarios_id() {
         return funcionarios_id;

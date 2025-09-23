@@ -1,7 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.categorias.requests;
 
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
-import jakarta.persistence.Column;
 
 public class CategoriasRequestUpdate {
     private String tipo;

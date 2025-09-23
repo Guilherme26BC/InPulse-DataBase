@@ -4,7 +4,9 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequ
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdate;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateFuncionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequestUpdateIdeias;
+import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
+import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
@@ -12,7 +14,10 @@ import br.com.fiap.inpulse.Inpulse_DataBase.repository.ProgramasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -32,8 +37,24 @@ public class ProgramasService {
         return programasRepository.save(dto.toModel());
     }
 
-    public List<Programas> buscarTodas() {
-        return programasRepository.findAllWithDetails();
+    public List<ProgramasResponse> buscarTodas() {
+        List<Programas> programas = programasRepository.findAllWithDetails();
+        List<ProgramasResponse> dtos = new ArrayList<>();
+        for (Programas p : programas) {
+            ProgramasResponse dto = new ProgramasResponse();
+            dto.setPrograma_id(p.getPrograma_id());
+            dto.setNome_programa(p.getNome_programa());
+            dto.setDataInicio(p.getDataInicio());
+            dto.setDataFim(p.getDataFim());
+            dto.setFuncionarios_nome(
+                p.getFuncionarios().stream().map(Funcionarios::getNome).distinct().toList()
+            );
+            dto.setIdeias_nome(
+                p.getIdeias().stream().map(Ideias::getNome).distinct().toList()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
     }
     
     public Optional<Programas> buscarPorId(Long id) {

@@ -6,7 +6,6 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.requests.IdeiasRequestUpd
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.ideias.responses.IdeiasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.IdeiasService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -18,7 +17,6 @@ public class ControllerIdeias {
 
     private final IdeiasService ideiasService;
 
-    @Autowired
     public ControllerIdeias(IdeiasService ideiasService) {
         this.ideiasService = ideiasService;
     }

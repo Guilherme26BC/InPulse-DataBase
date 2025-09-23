@@ -18,19 +18,19 @@ public class ProgramasResponse {
     private List<String> funcionarios_nome;
     private List<String> ideias_nome;
 
-    public ProgramasResponse toDto(Programas programas){
-        this.setPrograma_id(programas.getPrograma_id());
-        this.setNome_programa(programas.getNome_programa());
-        this.setDescricao_programa(programas.getDescricao_programa());
-        this.setDataInicio(programas.getDataInicio());
-        this.setDataFim(programas.getDataFim());
+    public ProgramasResponse toDto(Programas obj){
+        this.setPrograma_id(obj.getPrograma_id());
+        this.setNome_programa(obj.getNome_programa());
+        this.setDescricao_programa(obj.getDescricao_programa());
+        this.setDataInicio(obj.getDataInicio());
+        this.setDataFim(obj.getDataFim());
 
-        List<String> nomesFun = programas.getFuncionarios().stream()
+        List<String> nomesFun = obj.getFuncionarios().stream()
                 .map(p->{  return p.getPrimeiro_nome() + " " + p.getUltimo_sobrenome();
     }).collect(Collectors.toList());
         this.setFuncionarios_nome(nomesFun);
 
-        List<String> nomesIdeias = programas.getIdeias().stream()
+        List<String> nomesIdeias = obj.getIdeias().stream()
                 .map(p->{  return p.getNome();
                 }).collect(Collectors.toList());
         this.setIdeias_nome(nomesIdeias);

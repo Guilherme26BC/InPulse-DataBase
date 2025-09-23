@@ -4,7 +4,6 @@ import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Item;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.ItemRepository;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;

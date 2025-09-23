@@ -1,6 +1,5 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.itens.responses;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Item;
 
 import java.math.BigDecimal;

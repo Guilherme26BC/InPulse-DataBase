@@ -1,15 +1,9 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Categorias;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Ideias;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Programas;
 import br.com.fiap.inpulse.Inpulse_DataBase.repository.FuncionariosRepository;
-import br.com.fiap.inpulse.Inpulse_DataBase.repository.IdeiasRepository;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProgramasRequestUpdate {
     private String nome_programa;

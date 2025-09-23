@@ -1,11 +1,6 @@
 package br.com.fiap.inpulse.Inpulse_DataBase.dto.missoes.responses;
 
-import br.com.fiap.inpulse.Inpulse_DataBase.model.Funcionarios;
 import br.com.fiap.inpulse.Inpulse_DataBase.model.Missoes;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
