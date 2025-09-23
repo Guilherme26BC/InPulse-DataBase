@@ -14,37 +14,41 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("itens")
+@RequestMapping("/api/itens")
 public class ControllerItens {
     @Autowired
     private ItemService itemService;
 
     @PostMapping
-    public ResponseEntity<ItemResponseCreate> criarItem(@RequestBody ItensRequestCreate dto){
+    public ResponseEntity<ItemResponseCreate> criarItem(@RequestBody ItensRequestCreate dto) {
         return ResponseEntity.ok().body(new ItemResponseCreate().toDto(itemService.createItem(dto)));
     }
+
     @GetMapping
-    public ResponseEntity<List<ItemResponse>> buscarTodas(){
+    public ResponseEntity<List<ItemResponse>> buscarTodas() {
         return ResponseEntity.ok().body(itemService.getAll().stream().map(
-                i-> new ItemResponse().toDto(i)).collect(Collectors.toList()));
+                i -> new ItemResponse().toDto(i)).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ItemResponse> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<ItemResponse> buscarPorId(@PathVariable Long id) {
         return itemService.getItemId(id).map(i -> new ItemResponse().toDto(i))
-                .map(ResponseEntity::ok)
-                        .orElse(ResponseEntity.notFound().build());
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<ItemResponse> atualizar(@PathVariable Long id, @RequestBody ItensRequestUpdate dto){
-        return itemService.alterItem(id,dto).map(i -> new ItemResponse().toDto(i))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ItemResponse> atualizar(@PathVariable Long id, @RequestBody ItensRequestUpdate dto) {
+        return itemService.alterItem(id, dto).map(i -> new ItemResponse().toDto(i))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarIdeia(@PathVariable Long id){
-        if(itemService.deleteItem(id)){
+    public ResponseEntity<Void> deletarIdeia(@PathVariable Long id) {
+        if (itemService.deleteItem(id)) {
             return ResponseEntity.status(204).build();
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

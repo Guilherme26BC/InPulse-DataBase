@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>inPulse - Gestão de Funcionários</title>
+    <title>inPulse - Gestão de Programas</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,7 +21,7 @@
                     <span style="color: #ffd700;">in</span><span class="text-white">Pulse</span>
                 </a>
                 <span class="navbar-text text-white-50 d-none d-lg-block border-start border-secondary ps-3 ms-3">
-                    Gestão de funcionários
+                    Gestão de programas
                 </span>
             </div>
 
@@ -49,7 +49,7 @@
                 </ul>
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/programas">Programas</a>
+                        <a class="nav-link text-white" href="/usuarios">Usuários</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mx-auto">
@@ -73,61 +73,21 @@
     </nav>
 
     <div class="container-fluid p-4">
-        <h2 class="mb-4" style="color: #1a3a52; font-weight: 600;">Painel de Gestão de Funcionários</h2>
-
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-6 col-lg-3">
-                        <label for="searchId" class="form-label small fw-bold">Buscar por ID</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="searchId" placeholder="ID do funcionário">
-                            <button class="btn btn-primary" type="button" id="searchButton"><i
-                                    class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <label for="filterTier" class="form-label small fw-bold">Filtrar por Nível</label>
-                        <select id="filterTier" class="form-select">
-                            <option value="todos" selected>Todos</option>
-                            <option value="Bronze">Bronze</option>
-                            <option value="Prata">Prata</option>
-                            <option value="Ouro">Ouro</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <label for="sortOrder" class="form-label small fw-bold">Ordenar por</label>
-                        <select id="sortOrder" class="form-select">
-                            <option value="id_asc" selected>ID (Menor para o Maior)</option>
-                            <option value="id_desc">ID (Maior para o Menor)</option>
-                            <option value="nome_asc">Nome (A-Z)</option>
-                            <option value="nome_desc">Nome (Z-A)</option>
-                            <option value="pontos_desc">Pontuação (Maior)</option>
-                            <option value="pontos_asc">Pontuação (Menor)</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 col-lg-3 d-flex justify-content-end">
-                        <button class="btn btn-outline-secondary" type="button" id="clearFiltersButton">
-                            <i class="fas fa-filter"></i> Limpar Filtros
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h2 class="mb-4" style="color: #1a3a52; font-weight: 600;">Painel de Gestão de Programas</h2>
 
         <div class="table-responsive">
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
                         <th class="text-muted small">ID</th>
-                        <th class="text-muted small">Nome</th>
-                        <th class="text-muted small">E-mail</th>
-                        <th class="text-muted small">Pontuação</th>
-                        <th class="text-muted small">Nível</th>
+                        <th class="text-muted small">Nome do Programa</th>
+                        <th class="text-muted small">Período</th>
+                        <th class="text-muted small">Total de Participantes</th>
+                        <th class="text-muted small">Ideias Associadas</th>
                         <th class="text-muted small text-center">Ações</th>
                     </tr>
                 </thead>
-                <tbody id="funcionarios-table-body">
+                <tbody id="programas-table-body">
                 </tbody>
             </table>
         </div>
@@ -137,7 +97,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1a3a52; color: #fff;">
-                    <h5 class="modal-title" id="detailsModalLabel">Detalhes do Funcionário</h5>
+                    <h5 class="modal-title" id="detailsModalLabel">Detalhes do Programa</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -152,7 +112,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/user_info.js"></script>
-    <script src="/js/funcionarios.js"></script>
+    <script src="/js/programas.js"></script>
 </body>
 
 </html>

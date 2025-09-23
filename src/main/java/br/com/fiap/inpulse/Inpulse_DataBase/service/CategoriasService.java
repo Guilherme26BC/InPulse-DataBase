@@ -23,12 +23,12 @@ public class CategoriasService {
         return categoriasRepository.save(dto.toModel());
     }
 
-    public Optional<Categorias> buscarPorId(Long id){
-        return categoriasRepository.findById(id);
+    public List<Categorias> buscarTodas() {
+        return categoriasRepository.findAllWithDetails(); // Chama a nova consulta otimizada
     }
-
-    public List<Categorias> buscarTodas(){
-        return categoriasRepository.findAll();
+    
+    public Optional<Categorias> buscarPorId(Long id) {
+        return categoriasRepository.findById(id);
     }
 
     public boolean deletearCategoria(Long id){

@@ -18,9 +18,19 @@ public class PageController {
         return "index"; // O Spring Boot procurará por 'index.html'
     }
 
+    @GetMapping("/programas")
+    public String programasPage() {
+        return "programas"; // O Spring Boot procurará por 'programas.html'
+    }
+
     @GetMapping("/usuarios")
     public String funcionariosPage() {
         return "funcionarios";
+    }
+    
+    @GetMapping("/itens")
+    public String itensPage() {
+        return "itens";
     }
     
 }

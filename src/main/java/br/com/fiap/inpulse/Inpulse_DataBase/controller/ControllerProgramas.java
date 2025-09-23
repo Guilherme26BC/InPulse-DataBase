@@ -7,7 +7,6 @@ import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.requests.ProgramasRequ
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponse;
 import br.com.fiap.inpulse.Inpulse_DataBase.dto.programas.responses.ProgramasResponseCreate;
 import br.com.fiap.inpulse.Inpulse_DataBase.service.ProgramasService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("programas")
+@RequestMapping("/api/programas") // Adicionado o prefixo '/api'
 public class ControllerProgramas {
 
     @Autowired
@@ -30,13 +29,13 @@ public class ControllerProgramas {
     @GetMapping
     public ResponseEntity<List<ProgramasResponse>> buscarTodos(){
         return ResponseEntity.ok().body(programasService.buscarTodas()
-                .stream().map(p->new ProgramasResponse().toDto(p))
+                .stream().map(new ProgramasResponse()::toDto)
                 .collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProgramasResponse> buscarPorId(@PathVariable Long id){
-        return programasService.buscarPorId(id).map(p ->new ProgramasResponse().toDto(p))
+        return programasService.buscarPorId(id).map(new ProgramasResponse()::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -51,7 +50,7 @@ public class ControllerProgramas {
     @PutMapping("/{id}")
     public ResponseEntity<ProgramasResponse> atualizarPrograma(@PathVariable Long id, @RequestBody ProgramasRequestUpdate dto){
         return programasService.atualizarPrograma(id, dto)
-                .map(p-> new ProgramasResponse().toDto(p))
+                .map(new ProgramasResponse()::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -59,16 +58,15 @@ public class ControllerProgramas {
     @PutMapping("/ideias/{id}")
     public ResponseEntity<ProgramasResponse> atualizarProgramaIdeia(@PathVariable Long id, @RequestBody ProgramasRequestUpdateIdeias dto){
         return programasService.atualizarProgramaIdeia(id, dto)
-                .map(p-> new ProgramasResponse().toDto(p))
+                .map(new ProgramasResponse()::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
     @PutMapping("/funcionarios/{id}")
     public ResponseEntity<ProgramasResponse> atualizarProgramasFuncionarios(@PathVariable Long id, @RequestBody ProgramasRequestUpdateFuncionarios dto){
         return programasService.atualizarProgramaFuncionario(id,dto)
-                .map(p -> new ProgramasResponse().toDto(p))
+                .map(new ProgramasResponse()::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
 }

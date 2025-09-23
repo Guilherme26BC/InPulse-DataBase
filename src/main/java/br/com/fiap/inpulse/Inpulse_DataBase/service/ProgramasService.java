@@ -32,12 +32,12 @@ public class ProgramasService {
         return programasRepository.save(dto.toModel());
     }
 
-    public Optional<Programas> buscarPorId(Long id){
-        return programasRepository.findById(id);
+    public List<Programas> buscarTodas() {
+        return programasRepository.findAllWithDetails();
     }
-
-    public List<Programas> buscarTodas(){
-        return programasRepository.findAll();
+    
+    public Optional<Programas> buscarPorId(Long id) {
+        return programasRepository.findById(id);
     }
 
     public boolean deletarPrograma(Long id){

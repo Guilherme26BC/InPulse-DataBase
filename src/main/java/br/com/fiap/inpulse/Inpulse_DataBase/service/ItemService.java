@@ -26,7 +26,7 @@ public class ItemService {
         return itemRepository.findById(id);
     }
     public List<Item> getAll(){
-        return itemRepository.findAll();
+        return itemRepository.findAllWithDetails();
     }
     public Optional<Item> alterItem(Long id, ItensRequestUpdate dto){
         return itemRepository.findById(id).map(i -> itemRepository.save(dto.toModel(i)));

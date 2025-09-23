@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 @Entity
 public class Programas {
     @Id
@@ -26,7 +27,7 @@ public class Programas {
     @JoinTable(name = "programas_ideias",
             joinColumns = @JoinColumn(name = "ideias"),
             inverseJoinColumns = @JoinColumn(name = "programas"))
-    private List<Ideias> ideias;
+    private Set<Ideias> ideias;
 
     public Long getPrograma_id() {
         return programa_id;
@@ -76,11 +77,11 @@ public class Programas {
         this.funcionarios = funcionarios;
     }
 
-    public List<Ideias> getIdeias() {
+    public Set<Ideias> getIdeias() {
         return ideias;
     }
 
-    public void setIdeias(List<Ideias> ideias) {
+    public void setIdeias(Set<Ideias> ideias) {
         this.ideias = ideias;
     }
 }
